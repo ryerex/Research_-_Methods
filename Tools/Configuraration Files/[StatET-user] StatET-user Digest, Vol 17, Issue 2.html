@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!-- saved from url=(0081)http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/000243.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title> [StatET-user] StatET-user Digest, Vol 17, Issue 2
+   </title>
+   <link rel="Index" href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/index.html">
+   <link rel="made" href="mailto:statet-user%40lists.r-forge.r-project.org?Subject=%5BStatET-user%5D%20StatET-user%20Digest%2C%20Vol%2017%2C%20Issue%202&amp;In-Reply-To=4ADC9287.5080802%40gmail.com">
+   <meta name="robots" content="index,nofollow">
+   
+   <link rel="Previous" href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/000242.html">
+   <link rel="Next" href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/000244.html">
+ </head>
+ <body bgcolor="#ffffff">
+   <h1>[StatET-user] StatET-user Digest, Vol 17, Issue 2</h1>
+    <b>Stephan Wahlbrink</b> 
+    <a href="mailto:statet-user%40lists.r-forge.r-project.org?Subject=%5BStatET-user%5D%20StatET-user%20Digest%2C%20Vol%2017%2C%20Issue%202&amp;In-Reply-To=4ADC9287.5080802%40gmail.com" title="[StatET-user] StatET-user Digest, Vol 17, Issue 2">stephan.wahlbrink at walware.de
+       </a><br>
+    <i>Mon Oct 19 21:03:10 CEST 2009</i>
+    <p></p><ul>
+        <li>Previous message: <a href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/000242.html">[StatET-user] StatET-user Digest, Vol 17, Issue 2
+</a></li>
+        <li>Next message: <a href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/000244.html">[StatET-user] Setting up StatET in ubuntu.
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/date.html#243">[ date ]</a>
+              <a href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/thread.html#243">[ thread ]</a>
+              <a href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/subject.html#243">[ subject ]</a>
+              <a href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/author.html#243">[ author ]</a>
+         </li>
+       </ul>
+    <hr>  
+<!--beginarticle-->
+<pre>Hi Jonny,
+
+Jiyang Yu wrote [2009-10-19 18:23]:
+&gt;<i> Hi Stephan
+</i>&gt;<i> 
+</i>&gt;<i> Thanks a lot for your reply. Here is my reply:
+</i>&gt;<i> 
+</i>&gt;<i>  &gt; Simply omit the argument "ldc-sv-otick".
+</i>&gt;<i> I only use "rmiregistry &amp;", which seems work.
+</i>&gt;<i> 
+</i>&gt;<i>  &gt;path-to-R-home/R/x86_64-unknown-linux-gnu-library/2.9/rJava/jri/libjri.so
+</i>&gt;<i>  &gt;Is this the real output or did you remove the real path? This is not a 
+</i>&gt;<i> valid path. Check the setting for R_HOME in the script.
+</i>&gt;<i> What is your R_HOME and where did you installed rJava to?
+</i>&gt;<i> 
+</i>&gt;<i> yes, I modify the path a little bit when I gave you. I am running R 
+</i>&gt;<i> [...]
+</i>&gt;<i> 
+</i>&gt;&gt;&gt;<i> java.lang.UnsatisfiedLinkError: 
+</i>&gt;&gt;&gt;<i> path-to-R-home/R/x86_64-unknown-linux-gnu-library/2.9/rJava/jri/libjri.so: 
+</i>&gt;&gt;&gt;<i> libR.so: cannot open shared object file: *No such file or directory
+</i>
+Please note that the error means, that it cannot load the shared library 
+of R (libR.so) itself. The JRI library (libjri.so) seems to be resolved 
+and loaded correctly. So the rJava configuration is probably correct.
+You should check if the file libR.so exists (usually at 
+R_HOME/lib/libR.so). If not, you have to recompile R with the shared 
+library option (--enable-R-shlib). If the file exists, please send me 
+the real complete path.
+
+Regards,
+Stephan
+
+
+&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> Today's Topics:
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i>    1. Re: [Ann] StatET 0.8.0 (John Gavin)
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> ----------------------------------------------------------------------
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> Message: 1
+</i>&gt;&gt;&gt;&gt;<i> Date: Thu, 1 Oct 2009 17:24:45 +0100
+</i>&gt;&gt;&gt;&gt;<i> From: John Gavin &lt;<a href="https://lists.r-forge.r-project.org/cgi-bin/mailman/listinfo/statet-user">john.b.gavin at gmail.com</a>&gt;
+</i>&gt;&gt;&gt;&gt;<i> Subject: Re: [StatET-user] [Ann] StatET 0.8.0
+</i>&gt;&gt;&gt;&gt;<i> To: <a href="https://lists.r-forge.r-project.org/cgi-bin/mailman/listinfo/statet-user">statet-user at lists.r-forge.r-project.org</a>
+</i>&gt;&gt;&gt;&gt;<i> Message-ID:
+</i>&gt;&gt;&gt;&gt;<i>     &lt;<a href="https://lists.r-forge.r-project.org/cgi-bin/mailman/listinfo/statet-user">e628c2030910010924y29ac3450k341003d85a5b3a58 at mail.gmail.com</a>&gt;
+</i>&gt;&gt;&gt;&gt;<i> Content-Type: text/plain; charset=ISO-8859-1
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> Hi,
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i>  
+</i>&gt;&gt;&gt;&gt;&gt;<i> what are we supposed to do with the rjserver and rjava packages?
+</i>&gt;&gt;&gt;&gt;&gt;<i>     
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> I have just been through the process (with Stephan's help)
+</i>&gt;&gt;&gt;&gt;<i> to get an R session, running remotely from a server, into eclipse on 
+</i>&gt;&gt;&gt;&gt;<i> my pc.
+</i>&gt;&gt;&gt;&gt;<i> so here are a few comments just fyi.
+</i>&gt;&gt;&gt;&gt;<i> You should still follow the installation instructions etc,
+</i>&gt;&gt;&gt;&gt;<i> in preferences to these personal comments,
+</i>&gt;&gt;&gt;&gt;<i> as my setup will probably differ to yours.
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> I am running eclipse on Vista and the remote server is running Linux 
+</i>&gt;&gt;&gt;&gt;<i> Redhat.
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> Where ever you place the script RJServer/startup.sh (and all the other
+</i>&gt;&gt;&gt;&gt;<i> files in the tar file)
+</i>&gt;&gt;&gt;&gt;<i> on the remote machine, that file location has to entered on your 
+</i>&gt;&gt;&gt;&gt;<i> local machine
+</i>&gt;&gt;&gt;&gt;<i> (in eclipse - run - run configuration - main tab - Remote command 
+</i>&gt;&gt;&gt;&gt;<i> entry).
+</i>&gt;&gt;&gt;&gt;<i> e.g. ~/.RJServer/startup.sh "ldc-sv-otick"
+</i>&gt;&gt;&gt;&gt;<i>  where ~ on the remote server means /opt/ontick (for me)
+</i>&gt;&gt;&gt;&gt;<i> so the script (and the other files) should be located at
+</i>&gt;&gt;&gt;&gt;<i> /opt/ontick/.RJServer/startup.sh
+</i>&gt;&gt;&gt;&gt;<i> Dont forget to make the script executable
+</i>&gt;&gt;&gt;&gt;<i> via something like chmod u+x /opt/ontick/.RJServer/startup.sh.
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> Edit the script /opt/ontick/.RJServer/startup.sh
+</i>&gt;&gt;&gt;&gt;<i> to add user specific details.
+</i>&gt;&gt;&gt;&gt;<i> In my case, I specified the following details:
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> # local repository of packages including rJava.
+</i>&gt;&gt;&gt;&gt;<i> R_LIBS=/opt/ontick/R/library
+</i>&gt;&gt;&gt;&gt;<i> R_HOME=/usr/lib64/R
+</i>&gt;&gt;&gt;&gt;<i> JAVA_HOME=/usr/java/jdk1.6.0_12/
+</i>&gt;&gt;&gt;&gt;<i> HOSTADDRESS=99.88.180.66
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> Run rmi registry and then manually run the starup script
+</i>&gt;&gt;&gt;&gt;<i> on the remote machine to test that it working.
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> nohup $JAVA_HOME/rmiregistry "ldc-sv-otick" &amp;
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> Perhaps use, "netstat -ntlp" and look for port 1099,
+</i>&gt;&gt;&gt;&gt;<i> the default, for the rmi registry entry.
+</i>&gt;&gt;&gt;&gt;<i> "ps -edf | grep -i rmiregistry"  to search for the process.
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> Test out the script:
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> ~/.RJServer/startup.sh "ldc-sv-otick" -debug
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> If all is well, run something like
+</i>&gt;&gt;&gt;&gt;<i> nohup ~/.RJServer/startup.sh "ldc-sv-otick" &amp;
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> On my pc, in Eclipse - run - run configuration - main tab - Remote
+</i>&gt;&gt;&gt;&gt;<i> command entry:
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> Address: //99.88.180.66/ldc-sv-otick (this uses the default port 1099).
+</i>&gt;&gt;&gt;&gt;<i> SSH port: 22 (the default)
+</i>&gt;&gt;&gt;&gt;<i> Username: (to login to remote server)
+</i>&gt;&gt;&gt;&gt;<i> Remote command: ~/.RJServer/startup.sh "ldc-sv-otick"
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> Hope this helps a bit.
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> Regards,
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> John.
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> <a href="https://lists.r-forge.r-project.org/cgi-bin/mailman/listinfo/statet-user">John.B.Gavin at gmail.com</a>
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> Date: Wed, 30 Sep 2009 18:11:03 +0100
+</i>&gt;&gt;&gt;&gt;<i> From: Corrado &lt;<a href="https://lists.r-forge.r-project.org/cgi-bin/mailman/listinfo/statet-user">ct529 at york.ac.uk</a>&gt;
+</i>&gt;&gt;&gt;&gt;<i> Subject: Re: [StatET-user] [Ann] StatET 0.8.0
+</i>&gt;&gt;&gt;&gt;<i> To: <a href="https://lists.r-forge.r-project.org/cgi-bin/mailman/listinfo/statet-user">statet-user at lists.r-forge.r-project.org</a>
+</i>&gt;&gt;&gt;&gt;<i> Message-ID: &lt;<a href="https://lists.r-forge.r-project.org/cgi-bin/mailman/listinfo/statet-user">200909301811.03966.ct529 at york.ac.uk</a>&gt;
+</i>&gt;&gt;&gt;&gt;<i> Content-Type: Text/Plain; ?charset="iso-8859-1"
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> Dear Stephan,
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> what are we supposed to do with the rjserver and rjava packages? The 
+</i>&gt;&gt;&gt;&gt;<i> statet
+</i>&gt;&gt;&gt;&gt;<i> website in ?not accessible at the moment, I I need to complete the 
+</i>&gt;&gt;&gt;&gt;<i> upgrade.
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> Regards
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;<i> On Friday 25 September 2009 19:17:16 Stephan Wahlbrink wrote:
+</i>&gt;&gt;&gt;&gt;<i>  
+</i>&gt;&gt;&gt;&gt;&gt;<i> Dear StatET users,
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> I am glad to be able to announce the final release of StatET 0.8.0 for
+</i>&gt;&gt;&gt;&gt;&gt;<i> Eclipse 3.5 (and a new testing version for Eclipse 3.4).
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> New features since StatET 0.8-M3 besides bugfixes:
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ?- R-Editor/Object Browser: More robust object hover
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ?- Sweave document processing: New option to build TeX files using R
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ?- R-Editor: Code folding for Roxygen comments
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ?- R-Editor: Hyperlink support/Open declaration (F3) for R elements
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ? ? defined in the workspace
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> New major features in StatET 0.8:
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ?- Improved content assist in the R editor and R console
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ? ?(please look into the help how packages are handled)
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ?- Refactoring actions
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ? ?(see Source menu of the R editor)
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ?- Improved Roxygen support
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ?- Support to cancel R evaluations under Linux
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ? ?(see below)
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ?- R Object Browser and R object hover
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ?- Improved remote console functionality
+</i>&gt;&gt;&gt;&gt;&gt;<i> ? ? ?(see help and server package below)
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> Please note, that some new features uses the build mechanism of 
+</i>&gt;&gt;&gt;&gt;&gt;<i> Eclipse.
+</i>&gt;&gt;&gt;&gt;&gt;<i> To benefit from the new features, I recommend to enable automatic 
+</i>&gt;&gt;&gt;&gt;&gt;<i> build
+</i>&gt;&gt;&gt;&gt;&gt;<i> in Eclipse (enabled by default). After the installation/update of
+</i>&gt;&gt;&gt;&gt;&gt;<i> StatET, you should clean your workspace (menu: Project &gt; Clean...) to
+</i>&gt;&gt;&gt;&gt;&gt;<i> initiate a first build job.
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> For all Eclipse 3.5 users this is also a good occasion to update the
+</i>&gt;&gt;&gt;&gt;&gt;<i> Eclipse IDE to the maintenance release 3.5.1 ("Galileo SR1") published
+</i>&gt;&gt;&gt;&gt;&gt;<i> today.
+</i>&gt;&gt;&gt;&gt;&gt;<i> Users of Eclipse 3.4 can install a new testing version of StatET 0.8.0
+</i>&gt;&gt;&gt;&gt;&gt;<i> with the same features or directly upgrade to Eclipse 3.5.1.
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> The new versions are available for download from:
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> Online Update-Site for Eclipse 3.5:
+</i>&gt;&gt;&gt;&gt;&gt;<i> <a href="http://download.walware.de/eclipse-3.5">http://download.walware.de/eclipse-3.5</a>
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> Archived Update-Site for Eclipse 3.5:
+</i>&gt;&gt;&gt;&gt;&gt;<i> <a href="http://download.walware.de/eclipse-3.5/site-statet-00.08.00.zip">http://download.walware.de/eclipse-3.5/site-statet-00.08.00.zip</a>
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> Online 'testing' Update-Site for Eclipse 3.4:
+</i>&gt;&gt;&gt;&gt;&gt;<i> <a href="http://download.walware.de/eclipse-3.4/testing">http://download.walware.de/eclipse-3.4/testing</a>
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> Archived 'testing' Update-Site for Eclipse 3.4:
+</i>&gt;&gt;&gt;&gt;&gt;<i> <a href="http://download.walware.de/eclipse-3.4/testing/site-statet-00.08.00.zip">http://download.walware.de/eclipse-3.4/testing/site-statet-00.08.00.zip</a> 
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> RJ-Server:
+</i>&gt;&gt;&gt;&gt;&gt;<i> <a href="http://download.walware.de/rj/rjserver-00.03.00.tar">http://download.walware.de/rj/rjserver-00.03.00.tar</a>
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> For Linux users: I created a patched version of rJava/JRI which 
+</i>&gt;&gt;&gt;&gt;&gt;<i> supports
+</i>&gt;&gt;&gt;&gt;&gt;<i> canceling of R evaluations. If you want to use it, you can download it
+</i>&gt;&gt;&gt;&gt;&gt;<i> from:
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> rJava 0.6-4 Package/Sources:
+</i>&gt;&gt;&gt;&gt;&gt;<i> <a href="http://download.walware.de/rj/rJava_0.6-4.tar.gz">http://download.walware.de/rj/rJava_0.6-4.tar.gz</a>
+</i>&gt;&gt;&gt;&gt;&gt;<i> <a href="http://download.walware.de/rj/rJava_0.6-4-src.tar.gz">http://download.walware.de/rj/rJava_0.6-4-src.tar.gz</a>
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> rJava 0.7-0 Package/Sources:
+</i>&gt;&gt;&gt;&gt;&gt;<i> <a href="http://download.walware.de/rj/rJava_0.7-0.tar.gz">http://download.walware.de/rj/rJava_0.7-0.tar.gz</a>
+</i>&gt;&gt;&gt;&gt;&gt;<i> <a href="http://download.walware.de/rj/rJava_0.7-0-src.tar.gz">http://download.walware.de/rj/rJava_0.7-0-src.tar.gz</a>
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> I don't know, if it works for MacOS too, but other users are probably
+</i>&gt;&gt;&gt;&gt;&gt;<i> interested in your feedback, if you tried it out.
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> Thanks also to all contributors who supported the development of 
+</i>&gt;&gt;&gt;&gt;&gt;<i> StatET.
+</i>&gt;&gt;&gt;&gt;&gt;<i>
+</i>&gt;&gt;&gt;&gt;&gt;<i> Stephan
+</i>&gt;&gt;&gt;&gt;&gt;<i>     
+</i>&gt;&gt;<i>
+</i>
+</pre>
+
+
+<!--endarticle-->
+    <hr>
+    <p></p><ul>
+        <!--threads-->
+	<li>Previous message: <a href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/000242.html">[StatET-user] StatET-user Digest, Vol 17, Issue 2
+</a></li>
+	<li>Next message: <a href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/000244.html">[StatET-user] Setting up StatET in ubuntu.
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/date.html#243">[ date ]</a>
+              <a href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/thread.html#243">[ thread ]</a>
+              <a href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/subject.html#243">[ subject ]</a>
+              <a href="http://lists.r-forge.r-project.org/pipermail/statet-user/2009-October/author.html#243">[ author ]</a>
+         </li>
+       </ul>
+
+<hr>
+<a href="https://lists.r-forge.r-project.org/cgi-bin/mailman/listinfo/statet-user">More information about the StatET-user
+mailing list</a><br>
+
+</body></html>

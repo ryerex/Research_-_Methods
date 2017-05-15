@@ -1,0 +1,33 @@
+anomaly         package:multivariateAnomaly         R Documentation
+
+_A_n_o_m_a_l_y _D_e_t_e_c_t_i_o_n _g_i_v_e_n _a _n_o_n-_n_e_g_a_t_i_v_e _s_y_m_m_e_t_r_i_x _K_e_r_n_e_l _m_a_t_r_i_c_e_s.
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     This function outputs the connectivity values between the vertices
+     of the Kernel. Lower the value, more anomalous the vertex in the
+     original input.
+
+_U_s_a_g_e:
+
+     anomaly(KX, KY, d)
+
+_A_r_g_u_m_e_n_t_s:
+
+      KX: 
+
+      KY: 
+
+       d: 
+
+_A_u_t_h_o_r(_s):
+
+     Sriram Lakshminarasimhan  Siddarth Ramaswamy
+
+_R_e_f_e_r_e_n_c_e_s:
+
+     [1] Haibin Cheng, Pang-Ning Tan, Christopher Potter, and Steven Kl
+     A Robust Graph-based Algorithm for Detection and Characterization 
+     Multivariate Time Series, to appear in Proc.of IEEE International 
+     workshop on Spatial and Spatio-temporal Data Mining (ICDM/STDM 08)
+

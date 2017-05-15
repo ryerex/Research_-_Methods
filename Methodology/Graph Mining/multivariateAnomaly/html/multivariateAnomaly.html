@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Anomaly detection in time-series measurements</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for multivariateAnomaly {multivariateAnomaly}"><tr><td>multivariateAnomaly {multivariateAnomaly}</td><td align="right">R Documentation</td></tr></table>
+<h2>Anomaly detection in time-series measurements</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Performs anomaly detection using algorithm descriped in the referenced paper, for a set of multivariate time series predictor values and a set of target values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+multivariateAnomaly(X, Y, r, sig, nv, d = 0.1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+The predictor time series variables, each row is a variable and each column is a timestamp.
+</td></tr>
+<tr valign="top"><td><code>Y</code></td>
+<td>
+The target time series.
+</td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+The autoregression lag.
+</td></tr>
+<tr valign="top"><td><code>sig</code></td>
+<td>
+The spread width of the RBF kernel.
+</td></tr>
+<tr valign="top"><td><code>nv</code></td>
+<td>
+Number of eigenvectors to be used.
+</td></tr>
+<tr valign="top"><td><code>d</code></td>
+<td>
+The damping factor to be passed to the anomaly detection function. Default value is 0.1
+</td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+Intermediate outputs produced in this step passed to anomaly detection function
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>w</code></td>
+<td>
+The weight associated with each eigenvector.
+</td></tr>
+<tr valign="top"><td><code>KX</code></td>
+<td>
+The new aligned kernel matrix for X.
+</td></tr>
+<tr valign="top"><td><code>KY</code></td>
+<td>
+The kernel matrix for target Y.
+</td></tr>
+</table>
+
+<h3>Author(s)</h3>
+
+<p>
+Sriram Lakshminarasimhan
+Siddarth Ramaswamy
+</p>
+
+
+<h3>References</h3>
+
+<p>
+[1] Haibin Cheng, Pang-Ning Tan, Christopher Potter, and Steven Klooster. 
+A Robust Graph-based Algorithm for Detection and Characterization of Anomalies in Noisy
+Multivariate Time Series, to appear in Proc.of IEEE International Conference on Data Mining
+workshop on Spatial and Spatio-temporal Data Mining (ICDM/STDM 08)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# X is the predictor, having 2 variables whose values have been measured from
+# t1 to t5 . Y is the target variable.
+data(KernelPredictorSample2)
+data(KernelTargetSample2)
+X = as.matrix(KernelPredictorSample2)
+Y = as.matrix(KernelTargetSample2)
+X
+Y
+# multivariateAnomaly function takes in input target and predictor matrices, 
+# along with the number of eigen values and the spread width of the RBF kernel.
+# Damping factor is an optional parameter.
+RandomWalkOutput = multivariateAnomaly(X, Y, 0, 93.14, 5)
+RandomWalkOutput
+</pre>
+
+
+
+<hr><div align="center">[Package <em>multivariateAnomaly</em> version 1.0 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

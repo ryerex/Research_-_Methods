@@ -1,0 +1,44 @@
+matrixAlign       package:multivariateAnomaly       R Documentation
+
+_A_l_i_g_n_m_e_n_t _o_f _m_a_t_r_i_c_e_s.
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     The alignMatrix, takes in two kernel similarity matrices as input
+     and aligns them i.e. it maximizes the correlation between the two
+     matrices.
+
+_U_s_a_g_e:
+
+     matrixAlign(KX, KY)
+
+_A_r_g_u_m_e_n_t_s:
+
+       X: Kernel alignment of the predictor time series variables. 
+
+       Y: Kernel alignment of the target variables. 
+
+_A_u_t_h_o_r(_s):
+
+     Sriram Lakshminarasimhan
+
+_R_e_f_e_r_e_n_c_e_s:
+
+     [1] Haibin Cheng, Pang-Ning Tan, Christopher Potter, and Steven
+     Klooster.  A Robust Graph-based Algorithm for Detection and
+     Characterization of Anomalies in Noisy Multivariate Time Series,
+     to appear in Proc.of IEEE International Conference on Data Mining
+     workshop on Spatial and Spatio-temporal Data Mining (ICDM/STDM 08)
+
+_E_x_a_m_p_l_e_s:
+
+     data(KernelPredictorSample1)
+     data(KernelTargetSample1)
+     X = as.matrix(KernelPredictorSample1)
+     Y = as.matrix(KernelTargetSample1)
+     X
+     KX = RBFMeasure(X, 1.414)
+     KY = RBFMeasure(Y, 0.44)
+     K_Aligned = matrixAlign(KX, KY)
+     K_Aligned
+

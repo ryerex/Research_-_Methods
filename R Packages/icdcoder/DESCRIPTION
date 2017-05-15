@@ -1,0 +1,12 @@
+Package: icdcoder
+Title: ICD-9 and ICD-10 code utility functions and datasets
+Version: 0.0.0.9000
+Authors@R: person("Wade", "Cooper", email = "wcooper@healthesystems.com", role = c("aut", "cre"))
+Description: Utility functions to work with and between ICD-9 and ICD-10, along with datasets that provide the hierarchies for the ICD chapters, comorbidities, and CMS GEMs (for conversions).  
+Depends: R (>= 3.0.0)
+License: GPL-2
+LazyData: true
+Imports: data.table,
+    dplyr,
+    stringr
+Suggests: testthat

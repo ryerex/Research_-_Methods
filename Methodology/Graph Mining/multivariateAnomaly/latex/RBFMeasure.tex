@@ -1,0 +1,40 @@
+\HeaderA{RBFMeasure}{Calculate cosine similarity distance for a give timeseries measurement.}{RBFMeasure}
+\begin{Description}\relax
+Given a set of measurements and their timestamps, this function outputs a symmetric matrix that capture the pair wise similarity between every pair of timestamps.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}
+RBFMeasure(X, sig)
+\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{X}] X is a matrix, consisting of \$p\$ real valued measurements in each column (timestamp).
+
+\item[\code{sig}] sigma, the spread width of the RBF kernel.
+
+\end{ldescription}
+\end{Arguments}
+\begin{Value}
+A non-negative symmetric matrix is returned.
+\end{Value}
+\begin{Author}\relax
+Sriram Lakshminarasimhan        
+Siddarth Ramaswamy
+\end{Author}
+\begin{References}\relax
+Haibin Cheng, Pang-Ning Tan, Christopher Potter, Steven Klooster, "A Robust Graph-Based Algorithm for Detection and Characterization of Anomalies in Noisy Multivariate Time Series," icdmw, pp.349-358, 2008 IEEE International Conference on Data Mining Workshops, 2008
+\end{References}
+\begin{SeeAlso}\relax
+Other random walk algorithms 'outlierA', 'outlierB'
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}
+data(KernelData)
+TimeSeries = as.matrix(KernelData)
+
+TimeSeries
+RBFMeasure(TimeSeries, 1.414)
+\end{ExampleCode}
+\end{Examples}
+

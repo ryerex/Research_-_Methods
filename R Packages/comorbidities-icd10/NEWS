@@ -1,0 +1,61 @@
+NEWS for the comorbidities.icd10 package
+
+Changes for 0.6.1
+-----------------
+* Fixed preprocessor bug
+
+Changes for 0.6
+---------------
+* Ruijingfang Jiang noted that the HIV-code differs for Sweden
+* Fixed is.ICD when ICD-codes are empty
+* Renamed argument for cmrbdt.calc from "include_acute_column"" to a more
+  logical "incl_acute_codes" argument
+
+Changes for 0.5
+---------------
+* Added tests
+* Bugs in AHRQ-matches fixed and hypertension is now properly split into
+  uncomplicated and complicated
+* Added AHRQ v3.6 and 3.7 version and ability to quickly update to newer updates
+
+Changes for 0.4
+---------------
+* Externalized hierarchy and points calculator
+* Added the main cmrbdt.calc() function
+* Added a dot preprocessor
+* Expanded the tests
+* Improved manual - hidden some of the private functions and added families
+* Added deprecated warnings for deyo, ahrq, and elixhauser functions
+
+Changes for 0.3
+---------------
+* Started implementing regular expression alternatives for elixhauser and charlson scores
+* Refactored use in order to optimize the use of vectors with icdCodes for a single individual.
+* The original NA handling from the comorbidities package is now changed so that the missing codes are simply skipped - should have significant performance improvements
+* Renamed the functions to lower-case in for package consistency
+* Externalized numeric and regular expression functions as these may be of interest to users and renamed them to codefinder.*
+
+Changes for 0.2
+---------------
+* Implemented testthat tests
+* Bug found in the weighting of the Charlson's Deyo index; the weights that are set to 6 are wrong, note the code below:
+-  output.frame[, 16] <- output.frame[, 17] * 6
+-  output.frame[, 16] <- output.frame[, 17] * 6
+- both update the 16 column and not their own column
+* Bug found in the Deyo aortic aneurysm group:
+-  441, 441.9 does not include all 441 codes that correspond to the code according to CMS.goc ICD-9
+* Bug found in the Deyo severe liver group:
+-  572.3 and 572.4 cause a floating point mismatch -> Switched everyting to integers for Deyo and Elixhausers
+* Bug found in the Deyo renal group: 585 is a group and not just 585.00
+* Bug - use of seq(xxx.0 to xxx.9, by=0.01) will not include xxx.91 or above
+* Split Elixhauser hypertension group into complicated and uncomplicated
+* Switched to standard NROW/NCOL
+
+Changes for 0.1
+-------------------
+* Refactored the code for the comorbidities package to better suit a package-environment
+* Instead of looping through the values in each code-list the %in% is now used
+* The output.frame is now based on the actual names of the groups, should limit the risk of misclassifying diseases.
+* The hierarchy check is now vectorized and also applies to the deyo calculation for diabetes and malignancies
+* Converted the Rd documentation to roxygen format
+* Allowed for numeric icd-codes

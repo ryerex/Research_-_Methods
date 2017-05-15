@@ -1,0 +1,40 @@
+\HeaderA{matrixAlign}{Alignment of matrices.}{matrixAlign}
+\begin{Description}\relax
+The alignMatrix, takes in two kernel similarity matrices as input and aligns them i.e. it maximizes the correlation between the two matrices.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}
+matrixAlign(KX, KY)
+\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{X}] Kernel alignment of the predictor time series variables.
+
+\item[\code{Y}] Kernel alignment of the target variables.
+
+\end{ldescription}
+\end{Arguments}
+\begin{Author}\relax
+Sriram Lakshminarasimhan
+\end{Author}
+\begin{References}\relax
+[1] Haibin Cheng, Pang-Ning Tan, Christopher Potter, and Steven Klooster. 
+A Robust Graph-based Algorithm for Detection and Characterization of Anomalies in Noisy
+Multivariate Time Series, to appear in Proc.of IEEE International Conference on Data Mining
+workshop on Spatial and Spatio-temporal Data Mining (ICDM/STDM 08)
+\end{References}
+\begin{Examples}
+\begin{ExampleCode}
+data(KernelPredictorSample1)
+data(KernelTargetSample1)
+X = as.matrix(KernelPredictorSample1)
+Y = as.matrix(KernelTargetSample1)
+X
+KX = RBFMeasure(X, 1.414)
+KY = RBFMeasure(Y, 0.44)
+K_Aligned = matrixAlign(KX, KY)
+K_Aligned
+\end{ExampleCode}
+\end{Examples}
+

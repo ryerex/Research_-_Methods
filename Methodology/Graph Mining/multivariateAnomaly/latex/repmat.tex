@@ -1,0 +1,33 @@
+\HeaderA{repmat}{Replicate matrix.}{repmat}
+\aliasA{RepeatMatrix}{repmat}{RepeatMatrix}
+\begin{Description}\relax
+Analogous to the repmat function in matlab. A = repmat(B, m, n) creates a new matrix A having m * n tiling of B.
+The size of the matrix A will be [nrow(B) * m, ncol(B) * n]
+\end{Description}
+\begin{Usage}
+\begin{verbatim}
+repmat(B, m, n)
+\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{B}] The input matrix that has to be replicated.
+
+\item[\code{m}] Number of tilings along the row.
+
+\item[\code{n}] Number of tilings along the column.
+
+\end{ldescription}
+\end{Arguments}
+\begin{Author}\relax
+Sriram Lakshminarasimhan
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}
+B <- matrix(c(1:9), nrow=3)
+B
+A <- repmat(B, 2, 3)
+A
+\end{ExampleCode}
+\end{Examples}
+

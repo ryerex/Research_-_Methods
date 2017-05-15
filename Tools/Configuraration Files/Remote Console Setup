@@ -1,0 +1,1 @@
+rmiregistry -J-classpath -J/home/ry5t/.RJServer/de.walware.rj.server.jar&

@@ -1,0 +1,49 @@
+RBFMeasure        package:multivariateAnomaly        R Documentation
+
+_C_a_l_c_u_l_a_t_e _c_o_s_i_n_e _s_i_m_i_l_a_r_i_t_y _d_i_s_t_a_n_c_e _f_o_r _a _g_i_v_e _t_i_m_e_s_e_r_i_e_s _m_e_a_s_u_r_e_m_e_n_t.
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Given a set of measurements and their timestamps, this function
+     outputs a symmetric matrix that capture the pair wise similarity
+     between every pair of timestamps.
+
+_U_s_a_g_e:
+
+     RBFMeasure(X, sig)
+
+_A_r_g_u_m_e_n_t_s:
+
+       X: X is a matrix, consisting of $p$ real valued measurements in
+          each column (timestamp). 
+
+     sig: sigma, the spread width of the RBF kernel. 
+
+_V_a_l_u_e:
+
+     A non-negative symmetric matrix is returned.
+
+_A_u_t_h_o_r(_s):
+
+     Sriram Lakshminarasimhan         Siddarth Ramaswamy
+
+_R_e_f_e_r_e_n_c_e_s:
+
+     Haibin Cheng, Pang-Ning Tan, Christopher Potter, Steven Klooster,
+     "A Robust Graph-Based Algorithm for Detection and Characterization
+     of Anomalies in Noisy Multivariate Time Series," icdmw,
+     pp.349-358, 2008 IEEE International Conference on Data Mining
+     Workshops, 2008
+
+_S_e_e _A_l_s_o:
+
+     Other random walk algorithms 'outlierA', 'outlierB'
+
+_E_x_a_m_p_l_e_s:
+
+     data(KernelData)
+     TimeSeries = as.matrix(KernelData)
+
+     TimeSeries
+     RBFMeasure(TimeSeries, 1.414)
+

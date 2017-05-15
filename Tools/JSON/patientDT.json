@@ -1,0 +1,370 @@
+[
+    {
+        "patientID": "225521647A",
+        "claims": [
+            {
+                "claim": [
+                    {
+                        "patientID": "225521647A",
+                        "claimID": "29887015354",
+                        "claimState": "Virginia",
+                        "claimCounty": "Louisa",
+                        "claimZip": "23093",
+                        "claimFacilityID": "1780630608",
+                        "claimFacilityService": "13",
+                        "admitType": "~",
+                        "admitSrc": "~",
+                        "dschrgCD": "1",
+                        "claimType": "40",
+                        "admitDiagCD": "~",
+                        "prncplDiagCD": "V5481",
+                        "startDT": "2013-02-05",
+                        "endDT": "2013-02-05",
+                        "COUNT": 3
+                    },
+                    {
+                        "patientID": "225521647A",
+                        "claimID": "30401198255",
+                        "claimState": "Virginia",
+                        "claimCounty": "Louisa",
+                        "claimZip": "23093",
+                        "claimFacilityID": "1780630608",
+                        "claimFacilityService": "13",
+                        "admitType": "~",
+                        "admitSrc": "~",
+                        "dschrgCD": "1",
+                        "claimType": "40",
+                        "admitDiagCD": "~",
+                        "prncplDiagCD": "4019",
+                        "startDT": "2013-02-28",
+                        "endDT": "2013-02-28",
+                        "COUNT": 3
+                    },
+                    {
+                        "patientID": "225521647A",
+                        "claimID": "37595610690",
+                        "claimState": "Virginia",
+                        "claimCounty": "Louisa",
+                        "claimZip": "23093",
+                        "claimFacilityID": "1780630608",
+                        "claimFacilityService": "13",
+                        "admitType": "~",
+                        "admitSrc": "~",
+                        "dschrgCD": "1",
+                        "claimType": "40",
+                        "admitDiagCD": "~",
+                        "prncplDiagCD": "36289",
+                        "startDT": "2014-02-04",
+                        "endDT": "2014-02-04",
+                        "COUNT": 3
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "patientID": "225521647A",
+        "claims": [
+            [
+                {
+                    "patientID": "225521647A",
+                    "claimID": "29887015354",
+                    "claimState": "Virginia",
+                    "claimCounty": "Louisa",
+                    "claimZip": "23093",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "V5481",
+                    "startDT": "2013-02-05",
+                    "endDT": "2013-02-05",
+                    "COUNT": 3
+                },
+                {
+                    "patientID": "225521647A",
+                    "claimID": "30401198255",
+                    "claimState": "Virginia",
+                    "claimCounty": "Louisa",
+                    "claimZip": "23093",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "4019",
+                    "startDT": "2013-02-28",
+                    "endDT": "2013-02-28",
+                    "COUNT": 3
+                },
+                {
+                    "patientID": "225521647A",
+                    "claimID": "37595610690",
+                    "claimState": "Virginia",
+                    "claimCounty": "Louisa",
+                    "claimZip": "23093",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "36289",
+                    "startDT": "2014-02-04",
+                    "endDT": "2014-02-04",
+                    "COUNT": 3
+                }
+            ]
+        ]
+    },
+    {
+        "patientID": "412561751A",
+        "claims": [
+            [
+                {
+                    "patientID": "412561751A",
+                    "claimID": "30465324092",
+                    "claimState": "Virginia",
+                    "claimCounty": "Albemarle",
+                    "claimZip": "22901",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "2572",
+                    "startDT": "2013-03-14",
+                    "endDT": "2013-03-14",
+                    "COUNT": 3
+                },
+                {
+                    "patientID": "412561751A",
+                    "claimID": "32109356446",
+                    "claimState": "Virginia",
+                    "claimCounty": "Albemarle",
+                    "claimZip": "22901",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "2572",
+                    "startDT": "2013-05-08",
+                    "endDT": "2013-05-08",
+                    "COUNT": 3
+                },
+                {
+                    "patientID": "412561751A",
+                    "claimID": "35194267511",
+                    "claimState": "Virginia",
+                    "claimCounty": "Albemarle",
+                    "claimZip": "22901",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "41401",
+                    "startDT": "2013-09-03",
+                    "endDT": "2013-09-03",
+                    "COUNT": 3
+                }
+            ]
+        ]
+    },
+    {
+        "patientID": "412561751A",
+        "claims": [
+            [
+                {
+                    "patientID": "412561751A",
+                    "claimID": "30465324092",
+                    "claimState": "Virginia",
+                    "claimCounty": "Albemarle",
+                    "claimZip": "22901",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "2572",
+                    "startDT": "2013-03-14",
+                    "endDT": "2013-03-14",
+                    "COUNT": 3
+                },
+                {
+                    "patientID": "412561751A",
+                    "claimID": "32109356446",
+                    "claimState": "Virginia",
+                    "claimCounty": "Albemarle",
+                    "claimZip": "22901",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "2572",
+                    "startDT": "2013-05-08",
+                    "endDT": "2013-05-08",
+                    "COUNT": 3
+                },
+                {
+                    "patientID": "412561751A",
+                    "claimID": "35194267511",
+                    "claimState": "Virginia",
+                    "claimCounty": "Albemarle",
+                    "claimZip": "22901",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "41401",
+                    "startDT": "2013-09-03",
+                    "endDT": "2013-09-03",
+                    "COUNT": 3
+                }
+            ]
+        ]
+    },
+    {
+        "patientID": "412561751A",
+        "claims": [
+            [
+                {
+                    "patientID": "412561751A",
+                    "claimID": "30465324092",
+                    "claimState": "Virginia",
+                    "claimCounty": "Albemarle",
+                    "claimZip": "22901",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "2572",
+                    "startDT": "2013-03-14",
+                    "endDT": "2013-03-14",
+                    "COUNT": 3
+                },
+                {
+                    "patientID": "412561751A",
+                    "claimID": "32109356446",
+                    "claimState": "Virginia",
+                    "claimCounty": "Albemarle",
+                    "claimZip": "22901",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "2572",
+                    "startDT": "2013-05-08",
+                    "endDT": "2013-05-08",
+                    "COUNT": 3
+                },
+                {
+                    "patientID": "412561751A",
+                    "claimID": "35194267511",
+                    "claimState": "Virginia",
+                    "claimCounty": "Albemarle",
+                    "claimZip": "22901",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "41401",
+                    "startDT": "2013-09-03",
+                    "endDT": "2013-09-03",
+                    "COUNT": 3
+                }
+            ]
+        ]
+    },
+    {
+        "patientID": "225521647A",
+        "claims": [
+            [
+                {
+                    "patientID": "225521647A",
+                    "claimID": "29887015354",
+                    "claimState": "Virginia",
+                    "claimCounty": "Louisa",
+                    "claimZip": "23093",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "V5481",
+                    "startDT": "2013-02-05",
+                    "endDT": "2013-02-05",
+                    "COUNT": 3
+                },
+                {
+                    "patientID": "225521647A",
+                    "claimID": "30401198255",
+                    "claimState": "Virginia",
+                    "claimCounty": "Louisa",
+                    "claimZip": "23093",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "4019",
+                    "startDT": "2013-02-28",
+                    "endDT": "2013-02-28",
+                    "COUNT": 3
+                },
+                {
+                    "patientID": "225521647A",
+                    "claimID": "37595610690",
+                    "claimState": "Virginia",
+                    "claimCounty": "Louisa",
+                    "claimZip": "23093",
+                    "claimFacilityID": "1780630608",
+                    "claimFacilityService": "13",
+                    "admitType": "~",
+                    "admitSrc": "~",
+                    "dschrgCD": "1",
+                    "claimType": "40",
+                    "admitDiagCD": "~",
+                    "prncplDiagCD": "36289",
+                    "startDT": "2014-02-04",
+                    "endDT": "2014-02-04",
+                    "COUNT": 3
+                }
+            ]
+        ]
+    }
+]

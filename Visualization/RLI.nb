@@ -1,0 +1,4087 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    190458,       4079]
+NotebookOptionsPosition[    190088,       4062]
+NotebookOutlinePosition[    190439,       4077]
+CellTagsIndexPosition[    190396,       4074]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"Needs", "[", "\"\<PlotLegends`\>\"", "]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"lSmoothingRate", " ", "=", " ", 
+    RowBox[{"1", "/", "5"}]}], ";"}], "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Bureua", " ", "of", " ", "Labor", " ", "Statistics"}], " ", "-", 
+    " ", 
+    RowBox[{"National", " ", "Unemployment", " ", "Rate"}]}], " ", "*)"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"UnemploymentRate", " ", "=", " ", "\n", 
+   RowBox[{"{", "                                           ", 
+    RowBox[{
+    "4.7", ",", "  ", "4.5", ",", "  ", "4.4", ",", "  ", "4.5", ",", "  ", 
+     "4.4", ",", "\n", "  ", "4.6", ",", "  ", "4.5", ",", "  ", "4.4", ",", 
+     "  ", "4.5", ",", "  ", "4.5", ",", "  ", "4.6", ",", "  ", "4.7", ",", 
+     "  ", "4.7", ",", "  ", "4.7", ",", "  ", "4.8", ",", "  ", "4.7", ",", 
+     "  ", "4.9", ",", "\n", "  ", "4.9", ",", "  ", "4.8", ",", "  ", "5.1", 
+     ",", "  ", "5.0", ",", "  ", "5.5", ",", "  ", "5.6", ",", "  ", "5.8", 
+     ",", "  ", "6.2", ",", "  ", "6.2", ",", "  ", "6.6", ",", "  ", "6.8", 
+     ",", "  ", "7.2", ",", "\n", "  ", "7.6", ",", "  ", "8.1", ",", "  ", 
+     "8.5", ",", "  ", "8.9", ",", "  ", "9.4", ",", "  ", "9.5", ",", "  ", 
+     "9.4", ",", "  ", "9.7", ",", "  ", "9.8", ",", " ", "10.1", ",", " ", 
+     "10.0", ",", " ", "10.0", ",", "\n", "  ", "9.7", ",", "  ", "9.7", ",", 
+     "  ", "9.7", ",", "  ", "9.9", ",", "  ", "9.7", ",", "  ", "9.5", ",", 
+     "  ", "9.5", ",", "  ", "9.5", ",", "  ", "9.6"}], "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"UnemploymentRateSmoothed", " ", "=", " ", 
+   RowBox[{"ExponentialMovingAverage", "[", 
+    RowBox[{"UnemploymentRate", ",", " ", "lSmoothingRate"}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"UnemploymentRateScaled", " ", "=", " ", 
+    RowBox[{"Round", "[", 
+     RowBox[{
+      RowBox[{"99", "*", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"UnemploymentRateSmoothed", " ", "-", " ", 
+           RowBox[{"Min", "[", "UnemploymentRateSmoothed", "]"}]}], ")"}], 
+         "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"Max", "[", "UnemploymentRateSmoothed", "]"}], " ", "-", 
+           " ", "\n", "         \t", 
+           RowBox[{"Min", "[", "UnemploymentRateSmoothed", "]"}]}], ")"}]}], 
+        ")"}]}], " ", "+", " ", "1"}], "]"}]}], ";"}], "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Federal", " ", "Reserve"}], " ", "-", " ", 
+      RowBox[{"IPI", " ", 
+       RowBox[{"(", 
+        RowBox[{"Industrial", " ", "Production", " ", "Index"}], ")"}]}]}], 
+     ":", " ", 
+     RowBox[{"Consumer", " ", "goods"}]}], ";", " ", 
+    RowBox[{"2002", "=", "100"}], ";", " ", 
+    RowBox[{"Seasonally", " ", "Adjusted"}]}], " ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"IPIRelative", " ", "=", " ", "\n", 
+    RowBox[{"{", "                                                 ", 
+     RowBox[{
+     "0.908", ",", " ", "0.878", ",", " ", "0.886", ",", " ", "0.879", ",", 
+      " ", "0.899", ",", " ", "\n", " ", "0.861", ",", " ", "1.000", ",", " ",
+       "0.937", ",", " ", "0.977", ",", " ", "0.959", ",", " ", "0.947", ",", 
+      " ", "0.968", ",", " ", "0.954", ",", " ", "0.961", ",", " ", "0.868", 
+      ",", " ", "0.869", ",", " ", "0.862", ",", " ", "\n", " ", "0.846", ",",
+       " ", "0.851", ",", " ", "0.761", ",", " ", "0.708", ",", " ", "0.683", 
+      ",", " ", "0.668", ",", " ", "0.648", ",", " ", "0.501", ",", " ", 
+      "0.452", ",", " ", "0.485", ",", " ", "0.417", ",", " ", "0.301", ",", 
+      " ", "\n", " ", "0.142", ",", " ", "0.163", ",", " ", "0.139", ",", " ",
+       "0.094", ",", " ", "0.020", ",", " ", "0.000", ",", " ", "0.108", ",", 
+      " ", "0.198", ",", " ", "0.277", ",", " ", "0.332", ",", " ", "0.324", 
+      ",", " ", "0.361", ",", " ", "\n", " ", "0.446", ",", " ", "0.393", ",",
+       " ", "0.426", ",", " ", "0.336", ",", " ", "0.515", ",", " ", "0.472", 
+      ",", " ", "0.550"}], "\n", "}"}]}], ";"}], "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"US", " ", 
+       RowBox[{"Dept", ".", " ", "of"}], " ", "Commerce"}], " ", "-", " ", 
+      RowBox[{"Retail", " ", "Sales"}]}], " ", "&"}], " ", "Food", " ", 
+    "Services", " ", 
+    RowBox[{"(", "MARTS", ")"}]}], " ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"RetailSalesRelative", "  ", "=", " ", "\n", 
+    RowBox[{"{", "                                                 ", 
+     RowBox[{
+     "0.568", ",", "  ", "0.514", ",", " ", "0.533", ",", " ", "0.565", ",", 
+      " ", "0.693", ",", " ", "\n", " ", "0.655", ",", " ", "0.681", ",", " ",
+       "0.764", ",", " ", "0.717", ",", " ", "0.826", ",", " ", "0.734", ",", 
+      " ", "0.777", ",", " ", "0.780", ",", " ", "0.855", ",", " ", "0.893", 
+      ",", " ", "1.000", ",", " ", "0.947", ",", " ", "\n", " ", "0.942", ",",
+       " ", "0.850", ",", " ", "0.881", ",", " ", "0.912", ",", " ", "0.939", 
+      ",", " ", "0.949", ",", " ", "0.912", ",", " ", "0.847", ",", " ", 
+      "0.707", ",", " ", "0.448", ",", " ", "0.228", ",", " ", "0.000", ",", 
+      " ", "\n", " ", "0.135", ",", " ", "0.130", ",", " ", "0.013", ",", " ",
+       "0.024", ",", " ", "0.072", ",", " ", "0.176", ",", " ", "0.182", ",", 
+      " ", "0.341", ",", " ", "0.168", ",", " ", "0.287", ",", " ", "0.412", 
+      ",", " ", "0.417", ",", " ", "\n", " ", "0.442", ",", " ", "0.488", ",",
+       " ", "0.659", ",", " ", "0.685", ",", " ", "0.600", ",", " ", "0.577", 
+      ",", " ", "0.611", ",", " ", "0.633"}], "\n", "}"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"RetailSalesSmoothed", " ", "=", " ", 
+   RowBox[{"ExponentialMovingAverage", "[", " ", 
+    RowBox[{"RetailSalesRelative", ",", " ", 
+     RowBox[{"1", "/", "1"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"RetailSalesScaled", " ", "=", " ", 
+    RowBox[{"Round", "[", 
+     RowBox[{
+      RowBox[{"99", "*", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", " ", 
+          RowBox[{"RetailSalesSmoothed", " ", "-", " ", 
+           RowBox[{"Min", "[", " ", "RetailSalesSmoothed", "]"}]}], ")"}], 
+         "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"Max", "[", " ", "RetailSalesSmoothed", "]"}], " ", "-", 
+           " ", 
+           RowBox[{"Min", "[", " ", "RetailSalesSmoothed", "]"}]}], ")"}]}], 
+        ")"}]}], " ", "+", " ", "1"}], "]"}]}], ";"}], " ", "\n", "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "UnemploymentRateTemp", " ", "is", " ", "a", " ", "color", " ", "scale", 
+    " ", "I", " ", "designed", " ", "by", " ", "blending", " ", "over", " ", 
+    "a", " ", "range", " ", "of", " ", "100", " ", "gradations"}], " ", 
+   "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"Temp1", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Blend", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"Black", ",", " ", "Gray"}], "}"}], ",", " ", "x"}], "]"}], 
+      "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", " ", "0", ",", " ", "1", ",", " ", 
+       RowBox[{"1", "/", "10"}]}], "}"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Temp2", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Blend", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"Gray", ",", " ", "Orange"}], "}"}], ",", " ", "x"}], "]"}], 
+      "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", " ", "0", ",", " ", "1", ",", " ", 
+       RowBox[{"1", "/", "52"}]}], "}"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Temp3", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Blend", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"Orange", ",", " ", "Red"}], "}"}], ",", " ", "x"}], "]"}], 
+      "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", " ", "0", ",", " ", "1", ",", " ", 
+       RowBox[{"1", "/", "38"}]}], "}"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"UnemploymentRateTemp", " ", "=", " ", 
+    RowBox[{"Join", "[", 
+     RowBox[{"Temp1", ",", "Temp2", ",", "Temp3"}], "]"}]}], ";"}], "\n", 
+  "\n", 
+  RowBox[{"(*", "  ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+     "colorUnemploymentRate", " ", "is", " ", "a", " ", "function", " ", 
+      "that", " ", "is", " ", "passed", " ", "to", " ", "the", " ", 
+      "Mathematica", " ", "graphing", " ", "engine", " ", "and", " ", 
+      "allows", " ", "me", " ", "to", " ", "\n", "\t", "dynamically", " ", 
+      "change", " ", "the", " ", "color", " ", "of", " ", "the", " ", "plot", 
+      " ", "based", " ", "on", " ", "the", " ", "value", " ", "of", " ", "a", 
+      " ", "variable", " ", "that", " ", "is", " ", "not", " ", "on", " ", 
+      "the", " ", "x", " ", "or", " ", "y", " ", "axes", "  ", "\n", "\t", 
+      "The", " ", "built", " ", "in", " ", "Mathematica", " ", "color", " ", 
+      "variation", " ", "function", " ", "such", " ", "as", " ", "what", " ", 
+      "is", " ", "seen", " ", "in", " ", "3"}], "-", 
+     RowBox[{
+     "D", " ", "surface", " ", "plots", " ", "assumes", " ", "that", " ", 
+      "the", "\n", "\t", "color", " ", "is", " ", "set", " ", "based", " ", 
+      "on", " ", "the", " ", "value", " ", "of", " ", "x"}]}], ",", "y", ",", 
+    " ", 
+    RowBox[{"or", " ", 
+     RowBox[{"z", "."}]}]}], " ", "*)"}], "\n", "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ColorUnemploymentRate", " ", "=", " ", 
+    RowBox[{"Function", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"x", ",", " ", "y"}], "}"}], ",", 
+      RowBox[{"UnemploymentRateTemp", "[", 
+       RowBox[{"[", 
+        RowBox[{"UnemploymentRateScaled", "[", 
+         RowBox[{"[", 
+          RowBox[{"Round", "[", 
+           RowBox[{"x", "+", "1"}], "]"}], "]"}], "]"}], "]"}], "]"}]}], 
+     "]"}]}], ";"}], "\n", "\n", 
+  RowBox[{"(*", "  ", 
+   RowBox[{
+    RowBox[{
+    "I", " ", "also", " ", "need", " ", "to", " ", "create", " ", "my", " ", 
+     "own", " ", "Legend", " ", "as", " ", "the", " ", "Graphics", " ", 
+     "Engine", " ", "has", " ", "no", " ", "idea", " ", "what", " ", 
+     RowBox[{"I", "'"}], "m", " ", 
+     RowBox[{"doing", "!"}], " ", "I", " ", "create", " ", "my", " ", "own", 
+     " ", "legend", " ", "\n", "    ", 
+     RowBox[{
+     "by", " ", "building", " ", "a", " ", "small", " ", "graphic", " ", 
+      "that", " ", "is", " ", "essentially", " ", "a", " ", "horizontal", " ",
+       "bar"}]}], "-", 
+    RowBox[{
+     RowBox[{"graph", ".", " ", "The"}], " ", "color", " ", "with", " ", 
+     "the", " ", "bar", " ", "transitions", " ", "at", " ", "\n", "    ", 
+     RowBox[{
+     "a", " ", "constant", " ", "rate", " ", "across", " ", "the", " ", 
+      "full", " ", "scale", " ", "of", " ", "values", " ", "used", " ", "in", 
+      " ", "the", " ", 
+      RowBox[{"graph", "."}]}]}]}], " ", "*)"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ColorUnemploymentRateLegend", " ", "=", " ", 
+    RowBox[{"Function", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"x", ",", " ", "y"}], "}"}], ",", " ", 
+      RowBox[{"UnemploymentRateTemp", "[", 
+       RowBox[{"[", "x", "]"}], "]"}]}], "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"UnemploymentRateLegend", " ", "=", " ", 
+    RowBox[{"ListLinePlot", "[", 
+     RowBox[{
+      RowBox[{"ConstantArray", "[", 
+       RowBox[{"0.1", ",", " ", "100"}], "]"}], ",", " ", 
+      RowBox[{
+      "ColorFunction", " ", "->", " ", "ColorUnemploymentRateLegend"}], ",", 
+      " ", "\n", "   \t", 
+      RowBox[{"ColorFunctionScaling", " ", "->", " ", "False"}], ",", " ", 
+      RowBox[{"Frame", " ", "->", " ", "True"}], ",", " ", 
+      RowBox[{"Axes", " ", "->", " ", 
+       RowBox[{"{", 
+        RowBox[{"False", ",", " ", "False"}], "}"}]}], ",", " ", "\n", 
+      "   \t", 
+      RowBox[{"FrameTicks", " ", "->", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"None", ",", " ", "None"}], "}"}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"1", ",", " ", 
+               RowBox[{"Round", "[", 
+                RowBox[{
+                 RowBox[{"Min", "[", "UnemploymentRate", "]"}], ",", " ", 
+                 "0.1"}], "]"}]}], "}"}], ",", " ", "\n", "       \t\t", 
+             RowBox[{"{", 
+              RowBox[{"50", ",", " ", 
+               RowBox[{"Round", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Min", "[", "UnemploymentRate", "]"}], " ", "+", 
+                  " ", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"Max", "[", "UnemploymentRate", "]"}], " ", "-", 
+                    " ", 
+                    RowBox[{"Min", "[", "UnemploymentRate", "]"}]}], ")"}], 
+                   "/", "2"}]}], ",", " ", "0.1"}], "]"}]}], "}"}], ",", " ", 
+             "\n", "       \t\t", 
+             RowBox[{"{", 
+              RowBox[{"100", ",", " ", 
+               RowBox[{"Round", "[", 
+                RowBox[{
+                 RowBox[{"Max", "[", "UnemploymentRate", "]"}], ",", " ", 
+                 "0.1"}], "]"}]}], "}"}]}], "}"}], ",", " ", "None"}], 
+          "}"}]}], "}"}]}], ",", " ", "\n", "       ", 
+      RowBox[{"FrameLabel", " ", "->", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{
+          "\"\<Unemployment Rate\>\"", ",", " ", "14", ",", " ", "Bold"}], 
+          "]"}], ",", " ", "None"}], "}"}]}], ",", " ", "\n", "   \t", 
+      RowBox[{"PlotStyle", " ", "->", " ", 
+       RowBox[{"Directive", "[", 
+        RowBox[{"Thickness", "[", "1", "]"}], "]"}]}], ",", " ", 
+      RowBox[{"ImageSize", " ", "->", " ", "300"}], ",", " ", 
+      RowBox[{"AspectRatio", " ", "->", " ", 
+       RowBox[{"1", "/", "15"}]}]}], "]"}]}], ";"}], "\n", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Main", " ", "plot", " ", "uses", " ", "KronosRetailIndex", " ", "as", " ",
+     "the", " ", "path", " ", "and", " ", "colors", " ", "it", " ", "with", 
+    " ", "Federal", " ", "Reserve", " ", "IPI"}], " ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"WidthRange", "=", ".08"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"MinWidth", "=", ".04"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"IPIRelativeRange", "=", 
+   RowBox[{
+    RowBox[{"Max", "[", "IPIRelative", "]"}], "-", 
+    RowBox[{"Min", "[", "IPIRelative", "]"}]}]}], ";"}], "\n", 
+ RowBox[{"Dimensions", "[", "IPIRelativeRange", "]"}], "\n", 
+ RowBox[{
+  RowBox[{"IPIRelativeU", "=", 
+   RowBox[{
+    RowBox[{"Take", "[", 
+     RowBox[{
+      RowBox[{"IPIRelative", "[", 
+       RowBox[{"[", "]"}], "]"}], ",", "48"}], "]"}], "+", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"MinWidth", "*", "IPIRelativeRange"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"Take", "[", 
+           RowBox[{
+            RowBox[{"RetailSalesScaled", "[", 
+             RowBox[{"[", "]"}], "]"}], ",", "48"}], "]"}], "/", "100"}], 
+         ")"}], "*", 
+        RowBox[{"(", 
+         RowBox[{"WidthRange", "*", "IPIRelativeRange"}], ")"}]}], ")"}]}], 
+     ")"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"IPIRelativeL", "=", 
+   RowBox[{
+    RowBox[{"Take", "[", 
+     RowBox[{
+      RowBox[{"IPIRelative", "[", 
+       RowBox[{"[", "]"}], "]"}], ",", "48"}], "]"}], "-", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"MinWidth", "*", "IPIRelativeRange"}], ")"}], "+", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"Take", "[", 
+           RowBox[{
+            RowBox[{"RetailSalesScaled", "[", 
+             RowBox[{"[", "]"}], "]"}], ",", "48"}], "]"}], "/", "100"}], 
+         ")"}], "*", 
+        RowBox[{"(", 
+         RowBox[{"WidthRange", "*", "IPIRelativeRange"}], ")"}]}], ")"}]}], 
+     ")"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"lPlotStyle", " ", "=", " ", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"Directive", "[", 
+     RowBox[{
+      RowBox[{"Thickness", "[", ".0001", "]"}], ",", 
+      RowBox[{"JoinForm", "[", "\"\<Round\>\"", "]"}]}], "]"}]}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"lFrameLabel", "=", 
+   RowBox[{"FrameLabel", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Style", "[", 
+       RowBox[{"\"\<\>\"", ",", "\"\<AxesTitle\>\""}], "]"}], ",", 
+      RowBox[{"Style", "[", 
+       RowBox[{"\"\<Industrial Production\>\"", ",", "\"\<AxesTitle\>\""}], 
+       "]"}]}], "}"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"lPlotLabel", "=", 
+   RowBox[{"PlotLabel", "\[Rule]", " ", 
+    RowBox[{"Style", "[", 
+     RowBox[{
+     "\"\<Industrial Production, Sales, & Unemployment\>\"", ",", 
+      "\"\<GraphTitle\>\""}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"lFrameTicks", " ", "=", 
+   RowBox[{"FrameTicks", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"Automatic", ",", "None"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "\"\<August 2006\>\""}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"5", ",", "\"\<January 2007\>\""}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"11", ",", "\"\<July 2007\>\""}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"17", ",", "\"\<January 2008\>\""}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"23", ",", "\"\<July 2008\>\""}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"29", ",", "\"\<January 2009\>\""}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"35", ",", "\"\<July 2009\>\""}], "}"}], ",", "\n", "\t", 
+          RowBox[{"{", 
+           RowBox[{"41", ",", "\"\<January 2010\>\""}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"48", ",", "\"\<September 2010\>\""}], "}"}]}], "}"}], ",",
+         "\n", "\t", "None"}], "}"}]}], "}"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"lColorFunction", " ", "=", " ", 
+   RowBox[{"ColorFunction", "\[Rule]", "ColorUnemploymentRate"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"lEpilog", "=", 
+   RowBox[{"Epilog", "\[Rule]", 
+    RowBox[{"Inset", "[", " ", 
+     RowBox[{"UnemploymentRateLegend", " ", ",", 
+      RowBox[{"Offset", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "800"}], ",", 
+          RowBox[{"-", "275"}]}], "}"}], ",", 
+        RowBox[{"Scaled", "[", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1"}], "}"}], "]"}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"Left", ",", "Bottom"}], "}"}]}], "]"}]}]}], ";"}], "\n", 
+ RowBox[{"DateListPlot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"IPIRelativeU", ",", "IPIRelativeL"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "48"}], "}"}], ",", 
+   RowBox[{"InterpolationOrder", "\[Rule]", "3"}], ",", 
+   RowBox[{"Filling", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"1", "\[Rule]", 
+      RowBox[{"{", "2", "}"}]}], "}"}]}], ",", 
+   RowBox[{"Joined", " ", "\[Rule]", " ", "True"}], ",", "lFrameLabel", ",", 
+   "lFrameTicks", ",", "lPlotLabel", ",", " ", "\n", 
+   RowBox[{"Axes", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"False", ",", "False"}], "}"}]}], ",", " ", "lColorFunction", 
+   ",", 
+   RowBox[{"ColorFunctionScaling", "\[Rule]", "False"}], ",", "lPlotStyle", 
+   ",", 
+   RowBox[{"ImageSize", "\[Rule]", "900"}], ",", "lEpilog", ",", 
+   RowBox[{"AspectRatio", "\[Rule]", 
+    RowBox[{"1", "/", "3"}]}]}], "]"}], "\[IndentingNewLine]"}], "Code",
+ CellChangeTimes->{{3.44881862348904*^9, 3.4488186473805823`*^9}, {
+   3.4488187114767933`*^9, 3.448818717477024*^9}, {3.4488189208453293`*^9, 
+   3.4488189595360484`*^9}, {3.4488189979611197`*^9, 3.448819202899324*^9}, {
+   3.448819545681663*^9, 3.4488195496036887`*^9}, {3.448819850146033*^9, 
+   3.44881985755252*^9}, {3.4488199715249166`*^9, 3.448819972571825*^9}, {
+   3.4488200500743055`*^9, 3.448820168781229*^9}, {3.4488202012666435`*^9, 
+   3.4488202099387956`*^9}, {3.4488203362553377`*^9, 3.448820342708669*^9}, {
+   3.4488204116483755`*^9, 3.4488204626343813`*^9}, {3.44882049680735*^9, 
+   3.448820593404191*^9}, {3.4488208203333273`*^9, 3.448820837318246*^9}, {
+   3.4488209225240974`*^9, 3.448820922727229*^9}, 3.4488214118182335`*^9, {
+   3.448821459182155*^9, 3.448821583051327*^9}, {3.448821650852107*^9, 
+   3.4488217703746166`*^9}, {3.448821801845179*^9, 3.4488219972917767`*^9}, {
+   3.44882203844987*^9, 3.448822051528581*^9}, {3.448822090030306*^9, 
+   3.4488221204066668`*^9}, {3.448822176752941*^9, 3.448822177252963*^9}, {
+   3.448824598488077*^9, 3.448824638834195*^9}, {3.448827444786804*^9, 
+   3.448827527665517*^9}, {3.448828637871502*^9, 3.448828644715559*^9}, {
+   3.448828788159485*^9, 3.448828813035599*^9}, {3.448829228897979*^9, 
+   3.4488292727749443`*^9}, {3.448829555990757*^9, 3.4488295883984585`*^9}, 
+   3.448829733561212*^9, {3.4488298132679076`*^9, 3.4488298618169575`*^9}, {
+   3.448829944195648*^9, 3.4488299716812544`*^9}, {3.4488300165582647`*^9, 
+   3.4488300639353867`*^9}, {3.4488300990619607`*^9, 
+   3.4488301022808547`*^9}, {3.448830301196016*^9, 3.448830308055698*^9}, {
+   3.448830785295828*^9, 3.4488309390995927`*^9}, {3.4488310496045427`*^9, 
+   3.448831110060376*^9}, {3.44884964347325*^9, 3.4488496636295*^9}, {
+   3.44885327516075*^9, 3.44885328353575*^9}, {3.449439390933757*^9, 
+   3.4494393909493823`*^9}, {3.4494394547951756`*^9, 3.449439454810801*^9}, {
+   3.4495931550203447`*^9, 3.4495931700209208`*^9}, {3.4495932949944696`*^9, 
+   3.449593359246937*^9}, {3.4495936301792154`*^9, 3.4495936391326838`*^9}, {
+   3.4495936701495*^9, 3.449593675040313*^9}, {3.4495939304719963`*^9, 
+   3.449593937472265*^9}, 3.449594072930591*^9, {3.449594115510351*^9, 
+   3.4495941308546906`*^9}, {3.4495942163579736`*^9, 3.449594270485052*^9}, 
+   3.4495943255496664`*^9, {3.449594509212969*^9, 3.4495945162601147`*^9}, {
+   3.44959460104462*^9, 3.4495946090293016`*^9}, {3.4495946616250715`*^9, 
+   3.449594672641119*^9}, {3.45003648720801*^9, 3.450036548507735*^9}, 
+   3.4500368231606636`*^9, {3.450038463468521*^9, 3.4500385759266844`*^9}, {
+   3.450038614319029*^9, 3.450038619866153*^9}, {3.4500386575709667`*^9, 
+   3.4500387498916016`*^9}, {3.450038797895902*^9, 3.4500388004117527`*^9}, {
+   3.450038874371504*^9, 3.4500388774186516`*^9}, {3.450040533222986*^9, 
+   3.450040558489743*^9}, {3.4500405899442773`*^9, 3.450040601882312*^9}, {
+   3.450047557097125*^9, 3.450047568784625*^9}, {3.450047607940875*^9, 
+   3.450047694034625*^9}, {3.45004795842525*^9, 3.450048045878375*^9}, 
+   3.458605684872428*^9, {3.4586057791410694`*^9, 3.458605779531707*^9}, {
+   3.4586058146109543`*^9, 3.4586058152047234`*^9}, 3.4589242025605326`*^9, {
+   3.458924312534209*^9, 3.4589243156280975`*^9}, {3.459039110374201*^9, 
+   3.459039164750593*^9}, {3.4591162772987127`*^9, 3.459116288488146*^9}, {
+   3.4591164866750345`*^9, 3.4591164905502825`*^9}, {3.4591169842090983`*^9, 
+   3.459116998193652*^9}, {3.459117036038066*^9, 3.4591170393352575`*^9}, {
+   3.459117120561805*^9, 3.459117181427022*^9}, {3.4591173739590783`*^9, 
+   3.459117374396598*^9}, {3.4591199235457892`*^9, 3.459119954265522*^9}, {
+   3.4591758111727295`*^9, 3.4591758150476055`*^9}, {3.4591763070424895`*^9, 
+   3.4591763184052086`*^9}, {3.462461183190523*^9, 3.4624611944102063`*^9}, {
+   3.462468314605297*^9, 3.46246831812099*^9}, 3.463230262090366*^9, {
+   3.463331967524176*^9, 3.463331967586677*^9}, {3.4655825523026977`*^9, 
+   3.465582601788656*^9}, 3.46558263628976*^9, {3.465582756012341*^9, 
+   3.4655827623406687`*^9}, {3.4660908357325935`*^9, 3.466090837404907*^9}, {
+   3.46803131992038*^9, 3.4680313321235046`*^9}, {3.4680335743110046`*^9, 
+   3.4680336179047546`*^9}, {3.46803397210788*^9, 3.46803397538913*^9}, {
+   3.471106785371317*^9, 3.4711068021371565`*^9}, {3.4733727361323867`*^9, 
+   3.4733728056011367`*^9}, {3.4734422193718634`*^9, 
+   3.4734422230438795`*^9}, {3.475958512099*^9, 3.47595852963025*^9}, {
+   3.4783012205266247`*^9, 3.4783012392922497`*^9}, {3.478399708562375*^9, 
+   3.478399715499875*^9}, {3.478399783999875*^9, 3.478399869078*^9}, {
+   3.478399971718625*^9, 3.478400228656125*^9}, {3.47840027923425*^9, 
+   3.478400329124875*^9}, {3.478400387062375*^9, 3.47840040960925*^9}, {
+   3.47840046935925*^9, 3.478400471874875*^9}, {3.478400548406125*^9, 
+   3.478400553406125*^9}, 3.478400652578*^9, {3.478400699453*^9, 
+   3.478400723968625*^9}, {3.478400930203*^9, 3.478400958124875*^9}, {
+   3.4784477879488554`*^9, 3.4784477902613697`*^9}, {3.4813997870232344`*^9, 
+   3.481399804132719*^9}, {3.483751738360687*^9, 3.483751758610298*^9}, {
+   3.483751932081543*^9, 3.4837519336785774`*^9}, {3.48641253275*^9, 
+   3.486412554484375*^9}, {3.488036499390625*^9, 3.48803650415625*^9}, {
+   3.48803654990625*^9, 3.488036651609375*^9}, {3.48803668490625*^9, 
+   3.488036733671875*^9}, {3.48803677809375*^9, 3.48803683703125*^9}, {
+   3.48803687446875*^9, 3.488036958921875*^9}, {3.488037011265625*^9, 
+   3.4880372904375*^9}, {3.488116725087764*^9, 3.488116860026045*^9}, {
+   3.4881169134231625`*^9, 3.488116971148931*^9}, {3.4881171225579653`*^9, 
+   3.488117157577848*^9}, {3.496095423921875*^9, 3.4960954314375*^9}, {
+   3.49609546259375*^9, 3.496095513609375*^9}, {3.496095559359375*^9, 
+   3.49609561496875*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "}"}]], "Output",
+ CellChangeTimes->{3.6905496931622324`*^9}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, GraphicsComplexBox[CompressedData["
+1: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
+Bl47H8/PoVHLr09sND3RQ/GUVe6oekejKk43LHqW3ENxPKd3rqmURuXIfq6o
+/N5DCb7n+qm9ikZtWnfyxbL1HEqzZoIG9wONevhKu6LpVQ5lRnNQRV8jjbow
+9mKVTwmHsvYQM7G/hUZ9FXImcNN4LmX2Reqz3g4a1XPSqNLYBi4l8kPg4W4O
+jTp/cKfGnEviWP1CFqufRqXIvzg2PYFLkZyReaaaoFFNN2jHmHZyKbHnFM1z
+P9OoXfumvlguw6Oc56yZ9WaYRg1cFqZgpMejrP1vPRLt/62P51G4+2xqnf/S
+qD461KDL9jzKbIGs6S5JOrVqjc/+8As8yr2IH4SuLJ1aIHwqE3qFR/m6ZY6P
+tCKdGmvl87D7Oo/Cy7nc0TONTq0NVfkrEscq1RMYOTPoVMeqrRt0rvIoq7al
+691Xp1OzpCfsknfjUQZl/StPa9KpE84uXSp1gkcRdrmc3a5Np/qr5rcF7OdR
+Wh9f+KGzhE69NS/EVIrGoxye4rdMYSmduvn1Y+/PBjzK8mmRn76tFO9fUHo2
+ZwaP8tMlZwJ3DZ369/qPWU1/uJTDExsozA10qutMTc8kLpcy7UnXxfpNdGra
+vSXBRRVcyjvZDreGrXTqR8Xxuy7FcikKmqUzOszpVOfo4Nytd7iUxPSghZ8t
+6NQLlwurX7pwKaaPDN0V99GpG6M8PUf3cikhEeldRgfpVGXD1Jpi8fXRfSC5
++LQdnbrEyjT9+EIupcxyjl6SI51aP3PFcrtpXIp8wljO2Ck6dU2k1ca5EuLr
+4/LkhY0LnZr893Hn9C8cyg63r9nv3ehUl31fxqf2cf7f+io6tbrUJMGpi0MJ
+Wzt9arMvnWqRW/czuJ1Dsa01VD4bIK7PYu1r4zo5FPtNeTXT79Cpu2z15by4
+HMqUKIkFJffp1Btva02LCQ6FyT0y9UI4nSpv1j8x6CeHMl9+nc/CZ3RqSbjt
+90gZLuWUusCB/YpODeqY256hxqWoTi+P94+lU+m28i53l3Epz4f0tukm06lt
+zjLug9u4lNN53osrM+jUWQdGEgIduJTBk0obrfLo1G+OlXU6PuL6TNzqxSii
+U437rcL9n3Ep1QGX6ldX0KldcwNqbAu5FKnvEotu1dCpOfY0LbceLiXD3Nit
+mEGnRo9cOBQwnkeh3b2Z0M6kUx8s+7XWcgGPsuDdxjxmG5262yrb9eFWHqWq
+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
+LkbkJH90gTdWlVM6ZJGwF95Y9PZDxiesbApJb8xza8oeXYULhaQ3lpxG78ny
+uFpIemPEveV/1vD9C0lvTLujUcWBFlRIemMnVJZxNtSEFJLemNzkoO2OogeF
+pDc2X3vWtJ1/HxWS3tjWf38uLBNRSHpjF8elZcdLRhaS3pj5nd4gt0tRhaQ3
+luJ97+vmvueFpDdmOn0W34L+spD0xhynLa8yfPqqkPTGzq8L+erT97qQ9MZ8
+LT6W1Gi8LSS9seezJB6+pUcXkt4Y7R+vqphDMYWkN5ZQpZ51zC62kPTG9q0M
+feeyO67w//O4CkmPq1z5vtX7gthC0uPqXmOoa38pppD0uF4cMdsfJx9dSHpc
+Ig/nB/pebwpJj+uO65qH7rWvCkmP6zqVMkP1z4tC0uMSVKoywqc+LyQ9Lvfh
+4q9TVCMLSY9L5+7+R7ye8ELS41qxbvHfsiuhhaTH1dRsH1E3creQ9LhuOZ/K
+XZEYUEh6XCcnb2mRcPQuJD2ukCfaaa0bjhWSHtc/fb+8e2ps4XFlrdE1SJru
+CY/LKujgPsOBG/C4hP7iz0L8u/C4Zl6IVN7VFAqPqzZpe759xmN4XLxDSSW7
+Ap7B47q6u67dW+sFPK6Zu748WOT6Ch7X+oJFzWE5b+Bxlcd09JgQ0fC4/vs5
+ukwcPC6Z/KFzOZMT4HFNrCzUtxmXBI/LWH7wgcvZZHhccUWase1WKfC4epy8
+6x8vS4XHtdf5mtcRqTR4XOOMU3Q5TWnwuMpWB+ypeZwOj2tBbYBzg3UGPK7F
+tiu+v5qRCY/L9qDM4R91mfC4KnUDtC77ZsHj+rRqRX6X+HlCelwtvTefs3qy
+4XEpPpM3UwrKgcflWrduJW11LjyuH+2PGufycuFxzVr6/JnVnTx4XL0rWpXu
+r82Hx9Wzs+BtkCAfHte0QUbTcFgBPC6pC/eneJm9g8f11NyP1TyhEB5XL1c7
+MrGwEB7XlB2/Px2kFsHjeulsLNfysggeV3PZni2+csXwuJQVCofXXiiGx1Vf
+ssy6tKcYHtfcw8cyOneWwOM6Y6282ay45H8e19IftIaVpfC4SvaV/dGPLYXH
+ZW5mGL1Qswwe14fr4/29wsvgcT3y6GV9nVYOj6si5n7btqByeFxVAVWMzTIV
+8LhSQ9b9en2tAh7XF+PX9w3+VsDjipJ61/3yciU8rulHN8wuH66Ex5Xd2BW4
+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
+1Weq1O6eSfdjfL9Q+DozCvZP/9/70/8DWxTUSg==
+    "], {
+     {GrayLevel[0.5], EdgeForm[None], 
+      GraphicsGroupBox[PolygonBox[CompressedData["
+1:eJwl2lMUGEm3BtDYtm3btm3btm3bE9t2MrFt27YzuTv/fdjrvPaq1V9VV5+T
+sFH7Su0CBQgQICC9QwYIsD9IgAAHOMghDnOEoxzjOCc4ySlOc4aznOM8F7jI
+JS5zhatc4zo3uMktbnOHu9zjPg94yCMe84SnPOM5L3jJK17zhre84z0f+Mgn
+PvOFr3zjOz/4yS9+8x9/CBDUOhCIwAQhKMEITghCEorQhCEs4QhPBCISichE
+ISrRiE4MYhKL2MQhLvGITwISkojEJCEpyUhOClKSitSkIS3pSE8GMpKJzGQh
+K9nITg5ykovc5CEv+chPAQpSiMIUoSjFKE4JSlKK0pShLOUoTwUqUonKVKEq
+1ahODWpSi9rUoS71qE8DGtKIxjShKc1oTgta0orWtKEt7WhPBzrSic50oSvd
+6E4PetKL3vShL/3ozwAGMojBDGEowxjOCEYyitGMYSzjGM8EJjKJyUxhKtOY
+zgxmMovZzOEf5jKP+SxgIYtYzBKWsozlrGAlq1jNGtayjvVsYCOb2MwWtrKN
+7exgJ7vYzR728i/72M8BDnKIwxzhKMc4zglOcorTnOEs5zjPBS5yictc4SrX
+uM4NbnKL29zhLve4zwMe8ojHPOEpz3jOC17yite84S3veM8HPvKJz3zhK9/4
+zg9+8ovf/McfAgSTfwIRmCAEJRjBCUFIQhGaMIQlHOGJQEQiEZkoRCUa0YlB
+TGIRmzjEJR7xSUBCEpGYJCQlGclJQUpSkZo0pCUd6clARjKRmSxkJRvZyUFO
+cpGbPOQlH/kpQEEKUZgiFKUYxSlBSUpRmjKUpRzlqUBFKlGZKlSlGtWpQU1q
+UZs61KUe9WlAQxrRmCY0pRnNaUFLWtGaNrSlHe3pQEc60ZkudKUb3elBT3rR
+mz70pR/9GcBABjGYIQxlGMMZwUhGMZoxjGUc45nARCYxmSlMZRrTmcFMZjGb
+OfzDXOYxnwUsZBGLWcJSlrGcFaxkFatZw1rWsZ4NbGQTm9nCVraxnR3sZBe7
+2cNe/mUf+znAQQ5xmCMc5RjHOcFJTnGaM5zlHOe5wEUucZkrXOUa17nBTW5x
+mzvc5R73ecBDHvGYJzzlGc95wUte8Zo3vOUd7/nARz7xmS985Rvf+cFPfvGb
+//hDgODyTyACE4SgBCM4IQhJKEIThrCEIzwRiEgkIhOFqEQjOjGISSxiE4e4
+xCM+CUhIIhKThKQkIzkpSEkqUpOGtKQjPRnISCYyk4WsZCM7OchJLnKTh7zk
+Iz8FKEghClOEohSjOCUoSSlKU4aylKM8FahIJSpThapUozo1qEktalOHutSj
+Pg1oSCMa04SmNKM5LWhJK1rThra0oz0d6EgnOtOFrnSjOz3oSS9604e+9KM/
+AxjIIAYzhKEMYzgjGMkoRjOGsYxjPBOYyCQmM4WpTGM6M5jJLGYzh3+Yyzzm
+s4CFLGIxS1jKMpazgpWsYjVrWMs61rOBjWxiM1vYyja2s4Od7GI3e9jLv+xj
+Pwc4yCEOc4SjHOM4JzjJKU5zhrOc4zwXuMglLnOFq1zjOje4yS1uc4e73OM+
+D3jIIx7zhKc84zkveMkrXvOGt7zjPR/4yCc+84WvfOM7P/jJL37zH38IEEL+
+CURgghCUYAQnBCEJRWjCEJZwhCcCEYlEZKIQlWhEJwYxiUVs4hCXeMQnAQlJ
+RGKSkJRkIf7/bpZcTUFKUpGaNKQlHenJQEYykZksZCUb2clBTnKRmzzkJR/5
+KUBBClGYIhSlGMUpQUlKUZoylKUc5alARSpRmSpUpRrVqUFNalGbOtSlHvVp
+QEMa0ZgmNKUZzWlBS1rRmja0pR3t6UBHOtGZLnSlG93pQU96/V1T+tCXfvRn
+AAMZxGCGMJRhDGcEIxnFaMYwlnGMZwITmcRkpjCVaUxnBjOZxWzm8A9zmcd8
+FrCQRSxmCUtZxnJWsJJVrGYNa1nHejawkU1sZgtb2cZ2drCTXexmD3v5l33s
+5wAHOcRhjnCUYxznBCc5xWnOcJZznOcCF7nEZa5wlWtc5wY3ucVt7nCXe9zn
+AQ95xGOe8JRnPOcFL3nFa97wlne85wMf+cRnvvCVb3znBz/5xW/+4w8B5Cwg
+gQhMEIISjOCEICShCE0YwhKO8EQgIpGITBSiEo3oxCAmsYhNHOISj/gkICGJ
+SEwSkpLsb/5JQUpSkZo0pCUd6clARjKRmSxkJRvZyUFOcpGbPOQlH/kpQEEK
+UZgiFKUYxSlBSUpRmjKUpRzlqUBFKlGZKlSlGtWpQU1qUZs61KUe9WlAQxrR
+mCY0pRnNaUFLWtGaNrSlHe3pQEc60ZkudKUb3elBT/YF8b6zlz3sZhc72cF2
+trGVLWxmExvZwHrWsZY1rGYVK1nBcpaxlCUsZhELWcB85jGXf5jDbGYxkxlM
+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
+        "]]]}, {{}, {}, {}, 
+      {RGBColor[0.368417, 0.506779, 0.709798], PointSize[
+       0.011000000000000001`], Thickness[0.0001], JoinForm["Round"], 
+       LineBox[{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+         19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 
+        36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 
+        53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 
+        70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 
+        87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 
+        103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 
+        117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 
+        131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 
+        145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157},
+        VertexColors->Automatic], LineBox[CompressedData["
+1:eJwl10OwIIYWRdGXRtq2bdtK27Zt207btm3btm3b9l+pP1hVd37rDHaCBm0r
+tPkrICAgcZCAgB4hAgJmu+cwl3nMZwELWcRilrCUZSxnBStZxWrWsJZ1rGcD
+G9nEZrawlW1sZwc72cVu9rCXfeznAAc5xGGOcJRjHOcEJznFac5wlnOc5wIX
+ucRlrnCVa1znBje5xW3ucJd73OcBD3nEY57wlGc85wUvecVr3vCWd7znAx/5
+xGe+8JVvfOcHP/nFb/4Q4Cl/EYjABCEofxOM4IQgJKEITRjCEo7wRCAikYhM
+FKISjejEICaxiE0c4hKP+CQgIYlITBKSkozkpCAlqUhNGtKSjvRkICOZyEwW
+spKN7OQgJ7nITR7yko/8FOAfClKIwhShKMUoTglKUorSlKEs5ShPBSpSicpU
+oSrVqE4NalKL2tShLvWoTwMa0ojGNKEpzWhOC1rSitb8N6a2tKM9HehIJzrT
+ha50ozs96EkvetOHvvSjPwMYyCAG8y9DGMowhjOCkYxiNGMYyzjGM4GJTGIy
+U5jKNKYzg5nMYjZzmMs85rOAhSxiMUtYyjKWs4KVrGI1a1jLOtazgY1sYjNb
+2Mo2trODnexiN3vYyz72c4CDHOIwRzjKMY5zgpOc4jRnOMs5znOBi1ziMle4
+yjWuc4Ob3OI2d7jLPe7zgIc84jFPeMoznvOCl7ziNW94yzve84GPfOIzX/jK
+N77zg5/84jd/CAhk/wQiMEEIyt8EIzghCEkoQhOGsIQjPBGISCQiE4WoRCM6
+MYhJLGITh7jEIz4JSEgiEpOEpCQjOSlISSpSk4a0pCM9GchIJjKThaxkIzs5
+yEkucpOHvOQjPwX4h4IUojBFKEoxilOCkpSiNGUoSznKU4GKVKIyVahKNapT
+g5rUojZ1qEs96tOAhjSiMU1oSjOa04KWtKI1bWhLO9rTgY50ojNd6Eo3utOD
+nvSiN33oSz/6M4CBDGIw/zKEoQxjOCMYyShGM4axjGM8E5jIJCYzhalMYzoz
+mMksZjOHucxjPgtYyCIWs4SlLGM5K1jJKlazhrWsYz0b2MgmNrOFrWxjOzvY
+yS52s4e97GM/BzjIIQ5zhKMc4zgnOMkpTnOGs5zjPBe4yCUuc4WrXOM6N7jJ
+LW5zh7vc4z4PeMgjHvOEpzzjOS94ySte84a3vOM9H/jIJz7zha984zs/+Mkv
+fvOHgMD2TyACE4Sg/E0wghOCkIQiNGEISzjCE4GIRCIyUYhKNKITg5jEIjZx
+iEs84pOAhCQiMUlISjKSk4KUpCI1aUhLOtKTgYxkIjNZyEo2spODnOQiN3nI
+Sz7yU4B/KEghClOEohSjOCUoSSlKU4aylKM8FahIJSpThapUozo1qEktalOH
+utSjPg1oSCMa04SmNKM5LWhJK1rThra0oz0d6EgnOtOFrnSjOz3oSS9604e+
+9KM/AxjIIAbzL0MYyjCGM4KRjGI0YxjLOMYzgYlMYjJTmMo0pjODmcxiNnOY
+yzzms4CFLGIxS1jKMpazgpWsYjVrWMs61rOBjWxiM1vYyja2s4Od7GI3e9jL
+PvZzgIMc4jBHOMoxjnOCk5ziNGc4yznOc4GLXOIyV7jKNa5zg5vc4jZ3uMs9
+7vOAhzziMU94yjOe84KXvOI1b3jLO97zgY984jNf+Mo3vvODn/ziN38I0GN/
+EYjABCEofxOM4IQgJKEITRjCEo7wRCAikYhMFKISjejEICaxiE0c4hKP+CQg
+IYmC/L8Pk5CUZCQnBSlJRWrSkJZ0pCcDGclEZrKQlWxkJwc5yUVu8pCXfOSn
+AP9QkEIUpghFKUZxSlCSUpSmDGUpR3kqUJFKVKYKValGdWpQk1rUpg51qUd9
+GtCQRjSmCU1pRnNa0JJWtKYNbWlHezrQkU50pgtd6Ub3/5qbnvSiN33oSz/6
+M4CBDGIw/zKEoQxjOCMYyShGM4axjGM8E5jIJCYzhalMYzozmMksZjOHucxj
+PgtYyCIWs4SlLGM5K1jJKlazhrWsYz0b2MgmNrOFrWxjOzvYyS52s4e9/A8F
+1SFu
+        "],
+        VertexColors->Automatic]}, 
+      {RGBColor[0.880722, 0.611041, 0.142051], PointSize[
+       0.011000000000000001`], Thickness[0.0001], JoinForm["Round"], 
+       LineBox[CompressedData["
+1:eJwN02MDFQYAAMC3bNt2Ldu2XauWbdu2bdtcbdm2bdu1+3A/4RI3bFe57R+B
+QKBZ0EBgb7BAYB/7OcBBDnGYIxzlGMc5wUlOcZoznOUc57nARS5xmStc5RrX
+ucFNbnGbO9zlHvd5wEMe8ZgnPOUZz3nBS17xmje85R3v+cBHPvGZL3zlG9/5
+wU9+8ZtA8EDgD4IQlGAEJwQhCUVowhCWcIQnAhGJRGSiEJVoRCcGMYlFbOIQ
+l3jEJwEJSURikpCUZCQnBSlJRWrSkJZ0pCcDf5KRTGQmC1nJRnZykJNc5CYP
+eclHfgpQkEIUpghFKUZxSlCSUpSmDGUpR3kqUJFKVKYKValGdWpQk1rUpg51
++Yt61KcBf9OQRjSmCU1pRnNa0JJWtKYNbWlHezrQkU50pgtd6UZ3etCTXvSm
+D33pR38GMJBBDGYIQxnGcEYwklGMZgxjGcd4JjCRSUxmClOZxnRmMJNZzGYO
+c5nHfBawkEUsZglLWcZyVrCSVaxmDWtZx3o2sJFNbGYLW9nGdnawk138w272
+8C//sZd97OcABznEYY5wlGMc5wQnOcVpznCWc5znAhe5xGWucJVrXOcGN7nF
+be5wl3vc5wEPecRjnvCUZzznBS95xWve8JZ3vOcDH/nEZ77wlW985wc/+cVv
+AiH8JwhBCUZwQhCSUIQmDGEJR3giEJFIRCYKUYlGdGIQk1jEJg5xiUd8EpCQ
+RCQmCUlJRnJSkJJUpCYNaUlHejLwJxnJRGaykJVsZCcHOclFbvKQl3zkpwAF
+KURhilCUYhSnBCUpRWnKUJZylKcCFalEZapQlWpUpwY1qUVt6lCXv6hHfRrw
+Nw1pRGOa0JRmNKcFLWlFa9rQlna0pwMd6URnutCVbnSnBz3pRW/60Jd+9GcA
+AxnEYIYwlGEMZwQjGcVoxjCWcYxnAhOZxGSmMJVpTGcGM5nFbOYwl3nMZwEL
+WcRilrCUZSxnBStZxWrWsJZ1rGcDG9nEZrawlW1sZwc72cU/7GYP//Ife9nH
+fg5wkEMc5ghHOcZxTnCSU5zmDGc5x3kucJFLXOYKV7nGdW5wk1vc5g53ucd9
+HvCQRzzmCU95xnNe8JJXvOYNb3nHez7wkU985gtf+cZ3fvCTX/wmENJ/ghCU
+YAQnBCEJRWjCEJZwhCcCEYlEZKIQlWhEJwYxiUVs4hCXeMQnAQlJRGKSkJRk
+JCcFKUlFatKQlnSkJwN/kpFMZCYLWclGdnKQk1zkJg95yUd+ClCQQhSmCEUp
+RnFKUJJSlKYMZSlHeSpQkUpUpgpVqUZ1alCTWtSmDnX5i3rUpwF/05BGNKYJ
+TWlGc1rQkla0pg1taUd7OtCRTnSmC13pRnd60JNe9KYPfelHfwYwkEEMZghD
+GcZwRjCSUYxmDGMZx3gmMJFJTGYKU5nGdGYwk1nMZg5zmcd8FrCQRSxmCUtZ
+xnJWsJJVrGYNa1nHejawkU1sZgtb2cZ2drCTXfzDbvbwL/+xl33s5wAHOcRh
+jnCUYxznBCc5xWnOcJZznOcCF7nEZa5wlWtc5wY3ucVt7nCXe9znAQ95xGOe
+8JRnPOcFL3nFa97wlne85wMf+cRnvvCVb3znBz/5xW8CofwnCEEJRnBCEJJQ
+hCYMYQlHeCIQkUhEJgpRiUZ0YhCTWMQmDnGJR3wSkJBEJCYJSUlGclLQK3Qg
+8D8zT89q
+        "],
+        VertexColors->Automatic], LineBox[CompressedData["
+1:eJwNxGlgDgQAANBvlKYokYqoELuZY5hhGzY2dm/GDrO5jQ3DUKjcutBBKR2U
+DnJ0uKODytGd7nJ0URRFh6Pej/ealVVmVwQFAoEchQQHAqGEEU4EkUTRmjZE
+05Z2tKcDMXSkE52JpQtxdKUb3YkngUR60JNeJJFMb/qQQip96Uca6WSQSRbZ
+5JBLHv3JZwADKaCQIooZRAmDKaWMIQxlGMMZwUhGMZpyxjCWCioZx3gmUMVE
+JjGZaqYwlWncym1MZwYzuZ07uJNZzGYOc5nHfBawkLu4m3u4l/tYxGKWcD8P
+8CAPsZRlPMwjLOdRHmMFj/MET/IUK1nF0zzDap7lOZ7nBdawlhdZx3o2sJGX
+eJlXeJVNbGYLW9nGdnbwGjvZxeu8wZu8xW728Dbv8C572cd+DvAe7/MBH/IR
+H/MJn3KQz/icL/iSr/iab/iW7zjEYY5wlO/5gR/5iZ85xnF+4VdOcJLf+J1T
+nOYP/uQMZ/mLv/mHfznHeS5wkf8I1A4EgqhBTS7hUmpxGcHU5nKuoA51uZKr
+qMfV1KcB19CQa7mO62lEY26gCU25kZu4mWY0pwW30JJWhBBKGOFEEEkUrWlD
+NG1pR3s6EENHOtGZWLoQR1e60Z14EkikBz3pRRLJ9KYPKaTSl36kkU4GmWSR
+TQ655NGffAYwkAIKKaKYQZQwmFLKGMJQhjGcEYxkFKMpZwxjqaCScYxnAlVM
+ZBKTqWYKU/kfvYumig==
+        "],
+        VertexColors->Automatic]}}},
+    VertexColors->{{
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.05]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.1]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.15]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.2]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.25]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.3]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.35]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       GrayLevel[0.45]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.4868421052631579, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.34210526315789475`, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.2763157894736842, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.22368421052631576`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.17105263157894735`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.11842105263157893`, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.09210526315789475, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.07894736842105265, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.06578947368421051, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.03947368421052633, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       RGBColor[1, 0.05263157894736842, 0]}, {
+       GrayLevel[0.05]}, {
+       RGBColor[1, 0.40789473684210525`, 0]}}], {}, {}, {{}, {}}},
+  AspectRatio->NCache[
+    Rational[1, 3], 0.3333333333333333],
+  Axes->{False, False},
+  AxesLabel->{None, None},
+  AxesOrigin->{0., 0},
+  DisplayFunction->Identity,
+  Epilog->InsetBox[
+    GraphicsBox[{{}, 
+      GraphicsComplexBox[CompressedData["
+1:eJxdyzlKREEARdGHkaGBgYGBioiIiPOs3c7z1M6paOwWahv2TsxqSS5BG0X4
+p6AoTl3e6Mt7560vyevP7b2/56vV/eidz9bfR7vpfjyAB/EQHsYjeAyP4wk8
+iafwNJ7Bs3gOz+MFvIiX8DJewat4Da/jDbyJt/A2buF20wVnh46zS8fZo+Ps
+03EO6DiHdJwjOs4xHeeEjnNKxzmj45zTcS7oOJd0nCs6znXTbVxwxblhjwuu
+OB32uOCKc8seF1xx7tjjgivOPXtccMV5YI8LrjiP7HHBFeeJPS644jz/+xva
+7xOk
+       "], {{{}, {}, {
+          Hue[0.67, 0.6, 0.6], 
+          Directive[
+           PointSize[0.01388888888888889], 
+           RGBColor[0.368417, 0.506779, 0.709798], 
+           AbsoluteThickness[1.6], 
+           Thickness[1]], 
+          
+          LineBox[{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 
+           18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
+            35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 
+           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+            68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 
+           84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 
+           100}, VertexColors -> Automatic]}}}, VertexColors -> {{
+          GrayLevel[0]}, {
+          GrayLevel[0.05]}, {
+          GrayLevel[0.1]}, {
+          GrayLevel[0.15]}, {
+          GrayLevel[0.2]}, {
+          GrayLevel[0.25]}, {
+          GrayLevel[0.3]}, {
+          GrayLevel[0.35]}, {
+          GrayLevel[0.4]}, {
+          GrayLevel[0.45]}, {
+          GrayLevel[0.5]}, {
+          RGBColor[0.5, 0.5, 0.5]}, {
+          RGBColor[0.5096153846153846, 0.5, 0.49038461538461536`]}, {
+          RGBColor[0.5192307692307693, 0.5, 0.4807692307692308]}, {
+          RGBColor[0.5288461538461539, 0.5, 0.47115384615384615`]}, {
+          RGBColor[0.5384615384615384, 0.5, 0.46153846153846156`]}, {
+          RGBColor[0.5480769230769231, 0.5, 0.4519230769230769]}, {
+          RGBColor[0.5576923076923077, 0.5, 0.4423076923076923]}, {
+          RGBColor[0.5673076923076923, 0.5, 0.4326923076923077]}, {
+          RGBColor[0.5769230769230769, 0.5, 0.4230769230769231]}, {
+          RGBColor[0.5865384615384616, 0.5, 0.41346153846153844`]}, {
+          RGBColor[0.5961538461538461, 0.5, 0.40384615384615385`]}, {
+          RGBColor[0.6057692307692307, 0.5, 0.3942307692307692]}, {
+          RGBColor[0.6153846153846154, 0.5, 0.3846153846153846]}, {
+          RGBColor[0.625, 0.5, 0.375]}, {
+          RGBColor[0.6346153846153846, 0.5, 0.3653846153846154]}, {
+          RGBColor[0.6442307692307692, 0.5, 0.3557692307692308]}, {
+          RGBColor[0.6538461538461539, 0.5, 0.34615384615384615`]}, {
+          RGBColor[0.6634615384615384, 0.5, 0.33653846153846156`]}, {
+          RGBColor[0.6730769230769231, 0.5, 0.3269230769230769]}, {
+          RGBColor[0.6826923076923077, 0.5, 0.3173076923076923]}, {
+          RGBColor[0.6923076923076923, 0.5, 0.3076923076923077]}, {
+          RGBColor[0.7019230769230769, 0.5, 0.2980769230769231]}, {
+          RGBColor[0.7115384615384616, 0.5, 0.28846153846153844`]}, {
+          RGBColor[0.7211538461538461, 0.5, 0.27884615384615385`]}, {
+          RGBColor[0.7307692307692308, 0.5, 0.2692307692307692]}, {
+          RGBColor[0.7403846153846154, 0.5, 0.2596153846153846]}, {
+          RGBColor[0.75, 0.5, 0.25]}, {
+          RGBColor[0.7596153846153846, 0.5, 0.24038461538461536`]}, {
+          RGBColor[0.7692307692307692, 0.5, 0.23076923076923078`]}, {
+          RGBColor[0.7788461538461539, 0.5, 0.22115384615384615`]}, {
+          RGBColor[0.7884615384615384, 0.5, 0.21153846153846156`]}, {
+          RGBColor[0.7980769230769231, 0.5, 0.20192307692307693`]}, {
+          RGBColor[0.8076923076923077, 0.5, 0.1923076923076923]}, {
+          RGBColor[0.8173076923076923, 0.5, 0.1826923076923077]}, {
+          RGBColor[0.8269230769230769, 0.5, 0.17307692307692307`]}, {
+          RGBColor[0.8365384615384616, 0.5, 0.16346153846153844`]}, {
+          RGBColor[0.8461538461538461, 0.5, 0.15384615384615385`]}, {
+          RGBColor[0.8557692307692308, 0.5, 0.14423076923076922`]}, {
+          RGBColor[0.8653846153846154, 0.5, 0.13461538461538464`]}, {
+          RGBColor[0.875, 0.5, 0.125]}, {
+          RGBColor[0.8846153846153846, 0.5, 0.11538461538461536`]}, {
+          RGBColor[0.8942307692307692, 0.5, 0.10576923076923078`]}, {
+          RGBColor[0.9038461538461539, 0.5, 0.09615384615384615]}, {
+          RGBColor[0.9134615384615384, 0.5, 0.08653846153846156]}, {
+          RGBColor[0.9230769230769231, 0.5, 0.07692307692307693]}, {
+          RGBColor[0.9326923076923077, 0.5, 0.06730769230769229]}, {
+          RGBColor[0.9423076923076923, 0.5, 0.05769230769230771]}, {
+          RGBColor[0.9519230769230769, 0.5, 0.04807692307692307]}, {
+          RGBColor[0.9615384615384616, 0.5, 0.038461538461538436`]}, {
+          RGBColor[0.9711538461538461, 0.5, 0.028846153846153855`]}, {
+          RGBColor[0.9807692307692308, 0.5, 0.019230769230769218`]}, {
+          RGBColor[0.9903846153846154, 0.5, 0.009615384615384637]}, {
+          RGBColor[1, 0.5, 0]}, {
+          RGBColor[1, 0.5, 0]}, {
+          RGBColor[1, 0.4868421052631579, 0]}, {
+          RGBColor[1, 0.4736842105263158, 0]}, {
+          RGBColor[1, 0.4605263157894737, 0]}, {
+          RGBColor[1, 0.4473684210526316, 0]}, {
+          RGBColor[1, 0.4342105263157895, 0]}, {
+          RGBColor[1, 0.42105263157894735`, 0]}, {
+          RGBColor[1, 0.40789473684210525`, 0]}, {
+          RGBColor[1, 0.39473684210526316`, 0]}, {
+          RGBColor[1, 0.3815789473684211, 0]}, {
+          RGBColor[1, 0.368421052631579, 0]}, {
+          RGBColor[1, 0.35526315789473684`, 0]}, {
+          RGBColor[1, 0.34210526315789475`, 0]}, {
+          RGBColor[1, 0.32894736842105265`, 0]}, {
+          RGBColor[1, 0.3157894736842105, 0]}, {
+          RGBColor[1, 0.3026315789473684, 0]}, {
+          RGBColor[1, 0.2894736842105263, 0]}, {
+          RGBColor[1, 0.2763157894736842, 0]}, {
+          RGBColor[1, 0.26315789473684215`, 0]}, {
+          RGBColor[1, 0.25, 0]}, {
+          RGBColor[1, 0.2368421052631579, 0]}, {
+          RGBColor[1, 0.22368421052631576`, 0]}, {
+          RGBColor[1, 0.21052631578947367`, 0]}, {
+          RGBColor[1, 0.19736842105263158`, 0]}, {
+          RGBColor[1, 0.1842105263157895, 0]}, {
+          RGBColor[1, 0.17105263157894735`, 0]}, {
+          RGBColor[1, 0.15789473684210525`, 0]}, {
+          RGBColor[1, 0.14473684210526316`, 0]}, {
+          RGBColor[1, 0.13157894736842107`, 0]}, {
+          RGBColor[1, 0.11842105263157893`, 0]}, {
+          RGBColor[1, 0.10526315789473684`, 0]}, {
+          RGBColor[1, 0.09210526315789475, 0]}, {
+          RGBColor[1, 0.07894736842105265, 0]}, {
+          RGBColor[1, 0.06578947368421051, 0]}, {
+          RGBColor[1, 0.05263157894736842, 0]}, {
+          RGBColor[1, 0.03947368421052633, 0]}}], {}, {}, {{}, {}}}, {
+     DisplayFunction -> Identity, PlotRangePadding -> {{
+         Scaled[0.02], 
+         Scaled[0.02]}, {
+         Scaled[0.02], 
+         Scaled[0.05]}}, AxesOrigin -> {0., 0}, 
+      PlotRange -> {{0., 100.}, {0, 0.2}}, PlotRangeClipping -> True, 
+      ImagePadding -> All, DisplayFunction -> Identity, AspectRatio -> NCache[
+        Rational[1, 15], 0.06666666666666667], Axes -> {False, False}, 
+      AxesLabel -> {None, None}, AxesOrigin -> {0., 0}, DisplayFunction :> 
+      Identity, Frame -> {{True, True}, {True, True}}, 
+      FrameLabel -> {{None, None}, {
+         FormBox[
+          StyleBox["\"Unemployment Rate\"", 14, Bold, StripOnInput -> False], 
+          TraditionalForm], None}}, FrameTicks -> {{None, None}, {{{1, 
+           FormBox["4.4`", TraditionalForm]}, {50, 
+           FormBox["7.2`", TraditionalForm]}, {100, 
+           FormBox["10.100000000000001`", TraditionalForm]}}, None}}, 
+      GridLines -> {None, None}, GridLinesStyle -> Directive[
+        GrayLevel[0.5, 0.4]], ImageSize -> 300, 
+      Method -> {"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+            (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+             Part[#, 1]], 
+            (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+             Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+            (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+             Part[#, 1]], 
+            (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+             Part[#, 2]]}& )}}, PlotRange -> {{0., 100.}, {0, 0.2}}, 
+      PlotRangeClipping -> True, PlotRangePadding -> {{
+         Scaled[0.02], 
+         Scaled[0.02]}, {
+         Scaled[0.02], 
+         Scaled[0.05]}}, Ticks -> {Automatic, Automatic}}], 
+    Offset[{-800, -275}, 
+     Scaled[{1, 1}]], {Left, Bottom}],
+  Frame->{{True, True}, {True, True}},
+  FrameLabel->{{
+     FormBox[
+      StyleBox[
+      "\"Industrial Production\"", "AxesTitle", StripOnInput -> False], 
+      TraditionalForm], None}, {
+     FormBox[
+      StyleBox["\"\"", "AxesTitle", StripOnInput -> False], TraditionalForm], 
+     None}},
+  FrameTicks->{{Automatic, None}, {{{0., 
+       FormBox["\"August 2006\"", TraditionalForm]}, {5., 
+       FormBox["\"January 2007\"", TraditionalForm]}, {11., 
+       FormBox["\"July 2007\"", TraditionalForm]}, {17., 
+       FormBox["\"January 2008\"", TraditionalForm]}, {23., 
+       FormBox["\"July 2008\"", TraditionalForm]}, {29., 
+       FormBox["\"January 2009\"", TraditionalForm]}, {35., 
+       FormBox["\"July 2009\"", TraditionalForm]}, {41., 
+       FormBox["\"January 2010\"", TraditionalForm]}, {48., 
+       FormBox["\"September 2010\"", TraditionalForm]}}, None}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  ImageSize->900,
+  Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+         Part[#, 1]], 
+        (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+         Part[#, 2]]}& )}},
+  PlotLabel->FormBox[
+    StyleBox[
+    "\"Industrial Production, Sales, & Unemployment\"", "GraphTitle", 
+     StripOnInput -> False], TraditionalForm],
+  PlotRange->{{0., 47.99999999999999}, {-0.054400000000000004`, 1.0944}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.05], 
+     Scaled[0.05]}},
+  Ticks->{{}, Automatic}]], "Output",
+ CellChangeTimes->{3.6905496932582326`*^9}]
+}, Open  ]]
+},
+WindowSize->{1273, 1340},
+WindowMargins->{{Automatic, 345}, {Automatic, 145}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 25473, 554, 1527, "Code"],
+Cell[26056, 578, 89, 2, 30, "Output"],
+Cell[26148, 582, 163924, 3477, 346, "Output"]
+}, Open  ]]
+}
+]
+*)
+

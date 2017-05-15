@@ -1,0 +1,13 @@
+Package: multivariateAnomaly
+Type: Package
+Title: Anomaly detection in multivariate time series data
+Version: 1.0
+Date: 2009-11-06
+Author: Sriram Lakshminarasimhan
+Maintainer: <slakshm2@ncsu.edu>
+Description: This is a package for identifying anomalies in
+        multivariate time series data.
+License: GPL
+LazyLoad: yes
+Packaged: 2009-12-12 03:16:33 UTC; Sriram
+Built: R 2.9.2; ; 2009-12-12 03:16:34 UTC; windows

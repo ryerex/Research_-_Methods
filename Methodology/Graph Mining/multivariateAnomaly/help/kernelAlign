@@ -1,0 +1,55 @@
+kernelAlign       package:multivariateAnomaly       R Documentation
+
+_K_e_r_n_e_l_A_l_i_g_n_m_e_n_t _o_f _t_i_m_e-_s_e_r_i_e_s _m_e_a_s_u_r_e_m_e_n_t_s
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Performs KernelAlignment algorithm described in the referenced
+     paper, for a set of multivariate time series predictor values and
+     a set of target values.
+
+_U_s_a_g_e:
+
+     kernelAlign(X, Y, r = 0, sig = 0.1, nv = 1)
+
+_A_r_g_u_m_e_n_t_s:
+
+       X: The predictor time series variables, each row is a variable
+          and each column is a timestamp. 
+
+       Y: The target time series. 
+
+       r: The autoregression lag. 
+
+     sig: The spread width of the RBF kernel. 
+
+      nv: Number of eigenvectors to be used. 
+
+_A_u_t_h_o_r(_s):
+
+     Sriram Lakshminarasimhan Siddarth Ramaswamy
+
+_R_e_f_e_r_e_n_c_e_s:
+
+     [1] Haibin Cheng, Pang-Ning Tan, Christopher Potter, and Steven
+     Klooster.  A Robust Graph-based Algorithm for Detection and
+     Characterization of Anomalies in Noisy Multivariate Time Series,
+     to appear in Proc.of IEEE International Conference on Data Mining
+     workshop on Spatial and Spatio-temporal Data Mining (ICDM/STDM 08)
+
+_E_x_a_m_p_l_e_s:
+
+     #X is the predictor, having 2 variables whose values have been measured from
+     #t1 to t5 . Y is the target variable.
+     data(KernelPredictorSample1)
+     data(KernelTargetSample1)
+     X = as.matrix(KernelPredictorSample1)
+     Y = as.matrix(KernelTargetSample1)
+     X
+     Y
+     #kernelAlign function takes in the target and predictor as input
+     #along with number of eigen values, the standard deviation
+     #damping factor is an optional parameter
+     RandomWalkOutput = kernelAlign(X, Y, nv = 2)
+     RandomWalkOutput
+

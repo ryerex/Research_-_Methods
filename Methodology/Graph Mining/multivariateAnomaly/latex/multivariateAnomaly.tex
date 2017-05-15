@@ -1,0 +1,65 @@
+\HeaderA{multivariateAnomaly}{Anomaly detection in time-series measurements}{multivariateAnomaly}
+\begin{Description}\relax
+Performs anomaly detection using algorithm descriped in the referenced paper, for a set of multivariate time series predictor values and a set of target values.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}
+multivariateAnomaly(X, Y, r, sig, nv, d = 0.1)
+\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{X}] The predictor time series variables, each row is a variable and each column is a timestamp.
+
+\item[\code{Y}] The target time series.
+
+\item[\code{r}] The autoregression lag.
+
+\item[\code{sig}] The spread width of the RBF kernel.
+
+\item[\code{nv}] Number of eigenvectors to be used.
+
+\item[\code{d}] The damping factor to be passed to the anomaly detection function. Default value is 0.1
+
+\end{ldescription}
+\end{Arguments}
+\begin{Value}
+Intermediate outputs produced in this step passed to anomaly detection function
+
+\begin{ldescription}
+\item[\code{w}] The weight associated with each eigenvector.
+
+\item[\code{KX}] The new aligned kernel matrix for X.
+
+\item[\code{KY}] The kernel matrix for target Y.
+
+\end{ldescription}
+\end{Value}
+\begin{Author}\relax
+Sriram Lakshminarasimhan
+Siddarth Ramaswamy
+\end{Author}
+\begin{References}\relax
+[1] Haibin Cheng, Pang-Ning Tan, Christopher Potter, and Steven Klooster. 
+A Robust Graph-based Algorithm for Detection and Characterization of Anomalies in Noisy
+Multivariate Time Series, to appear in Proc.of IEEE International Conference on Data Mining
+workshop on Spatial and Spatio-temporal Data Mining (ICDM/STDM 08)
+\end{References}
+\begin{Examples}
+\begin{ExampleCode}
+# X is the predictor, having 2 variables whose values have been measured from
+# t1 to t5 . Y is the target variable.
+data(KernelPredictorSample2)
+data(KernelTargetSample2)
+X = as.matrix(KernelPredictorSample2)
+Y = as.matrix(KernelTargetSample2)
+X
+Y
+# multivariateAnomaly function takes in input target and predictor matrices, 
+# along with the number of eigen values and the spread width of the RBF kernel.
+# Damping factor is an optional parameter.
+RandomWalkOutput = multivariateAnomaly(X, Y, 0, 93.14, 5)
+RandomWalkOutput
+\end{ExampleCode}
+\end{Examples}
+

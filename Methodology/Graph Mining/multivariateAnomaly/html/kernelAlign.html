@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: KernelAlignment of time-series measurements</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for kernelAlign {multivariateAnomaly}"><tr><td>kernelAlign {multivariateAnomaly}</td><td align="right">R Documentation</td></tr></table>
+<h2>KernelAlignment of time-series measurements</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Performs KernelAlignment algorithm described in the referenced paper, for a set of multivariate time series predictor values and a set of target values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+kernelAlign(X, Y, r = 0, sig = 0.1, nv = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+The predictor time series variables, each row is a variable and each column is a timestamp.
+</td></tr>
+<tr valign="top"><td><code>Y</code></td>
+<td>
+The target time series.
+</td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+The autoregression lag.
+</td></tr>
+<tr valign="top"><td><code>sig</code></td>
+<td>
+The spread width of the RBF kernel.
+</td></tr>
+<tr valign="top"><td><code>nv</code></td>
+<td>
+Number of eigenvectors to be used.
+</td></tr>
+</table>
+
+<h3>Author(s)</h3>
+
+<p>
+Sriram Lakshminarasimhan
+Siddarth Ramaswamy
+</p>
+
+
+<h3>References</h3>
+
+<p>
+[1] Haibin Cheng, Pang-Ning Tan, Christopher Potter, and Steven Klooster. 
+A Robust Graph-based Algorithm for Detection and Characterization of Anomalies in Noisy
+Multivariate Time Series, to appear in Proc.of IEEE International Conference on Data Mining
+workshop on Spatial and Spatio-temporal Data Mining (ICDM/STDM 08)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+#X is the predictor, having 2 variables whose values have been measured from
+#t1 to t5 . Y is the target variable.
+data(KernelPredictorSample1)
+data(KernelTargetSample1)
+X = as.matrix(KernelPredictorSample1)
+Y = as.matrix(KernelTargetSample1)
+X
+Y
+#kernelAlign function takes in the target and predictor as input
+#along with number of eigen values, the standard deviation
+#damping factor is an optional parameter
+RandomWalkOutput = kernelAlign(X, Y, nv = 2)
+RandomWalkOutput
+</pre>
+
+
+
+<hr><div align="center">[Package <em>multivariateAnomaly</em> version 1.0 <a href="00Index.html">Index</a>]</div>
+
+</body></html>

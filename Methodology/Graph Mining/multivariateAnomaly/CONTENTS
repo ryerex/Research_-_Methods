@@ -1,0 +1,29 @@
+Entry: RBFMeasure
+Aliases: RBFMeasure
+Keywords: 
+Description: Calculate cosine similarity distance for a give timeseries measurement.
+URL: ../../../library/multivariateAnomaly/html/RBFMeasure.html
+
+Entry: kernelAlign
+Aliases: kernelAlign KAlign
+Keywords: 
+Description: KernelAlignment of time-series measurements
+URL: ../../../library/multivariateAnomaly/html/kernelAlign.html
+
+Entry: matrixAlign
+Aliases: matrixAlign
+Keywords: 
+Description: Alignment of matrices.
+URL: ../../../library/multivariateAnomaly/html/matrixAlign.html
+
+Entry: multivariateAnomaly
+Aliases: multivariateAnomaly
+Keywords: 
+Description: Anomaly detection in time-series measurements
+URL: ../../../library/multivariateAnomaly/html/multivariateAnomaly.html
+
+Entry: repmat
+Aliases: repmat RepeatMatrix
+Keywords: 
+Description: Replicate matrix.
+URL: ../../../library/multivariateAnomaly/html/repmat.html

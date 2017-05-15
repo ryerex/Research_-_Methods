@@ -1,0 +1,52 @@
+\HeaderA{kernelAlign}{KernelAlignment of time-series measurements}{kernelAlign}
+\aliasA{KAlign}{kernelAlign}{KAlign}
+\begin{Description}\relax
+Performs KernelAlignment algorithm described in the referenced paper, for a set of multivariate time series predictor values and a set of target values.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}
+kernelAlign(X, Y, r = 0, sig = 0.1, nv = 1)
+\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{X}] The predictor time series variables, each row is a variable and each column is a timestamp.
+
+\item[\code{Y}] The target time series.
+
+\item[\code{r}] The autoregression lag.
+
+\item[\code{sig}] The spread width of the RBF kernel.
+
+\item[\code{nv}] Number of eigenvectors to be used.
+
+\end{ldescription}
+\end{Arguments}
+\begin{Author}\relax
+Sriram Lakshminarasimhan
+Siddarth Ramaswamy
+\end{Author}
+\begin{References}\relax
+[1] Haibin Cheng, Pang-Ning Tan, Christopher Potter, and Steven Klooster. 
+A Robust Graph-based Algorithm for Detection and Characterization of Anomalies in Noisy
+Multivariate Time Series, to appear in Proc.of IEEE International Conference on Data Mining
+workshop on Spatial and Spatio-temporal Data Mining (ICDM/STDM 08)
+\end{References}
+\begin{Examples}
+\begin{ExampleCode}
+#X is the predictor, having 2 variables whose values have been measured from
+#t1 to t5 . Y is the target variable.
+data(KernelPredictorSample1)
+data(KernelTargetSample1)
+X = as.matrix(KernelPredictorSample1)
+Y = as.matrix(KernelTargetSample1)
+X
+Y
+#kernelAlign function takes in the target and predictor as input
+#along with number of eigen values, the standard deviation
+#damping factor is an optional parameter
+RandomWalkOutput = kernelAlign(X, Y, nv = 2)
+RandomWalkOutput
+\end{ExampleCode}
+\end{Examples}
+

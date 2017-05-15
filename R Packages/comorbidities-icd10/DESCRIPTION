@@ -1,0 +1,26 @@
+Package: comorbidities.icd10
+Type: Package
+Title: Calculates Comorbidity Indices Based on ICD-9/10
+Version: 0.6.1
+Date: 2015-07-12
+Author: Max Gordon
+Maintainer: Max Gordon <max@gforge.se>
+Description: Methods to categorize ICD-9-CM and ICD-10 codes into sensible
+    disease categories have been developed and published by numerous authors.
+    Two of the most widely used such methods are the Deyo adaptation of the
+    Charlson index and the Elixhauser index. This package has functions to
+    categorize comorbidites into the Deyo-Charlson index, the original
+    Elixhauser index of 30 comorbidities, and the AHRQ comorbidity index of 29
+    diagnoses (an update to the original Elixhauser method). This package
+    builds upon the work of Paul Gerrard and his comorbidities package.
+License: GPL-2
+LazyLoad: yes
+URL: https://github.com/gforge/comorbidities.icd10
+BugReports: https://github.com/gforge/comorbidities.icd10/issues
+Imports:
+    plyr (>= 1.8.1),
+    stringr
+Suggests:
+    testthat (>= 0.8)
+Encoding: UTF-8
+Roxygen: list(wrap= TRUE)

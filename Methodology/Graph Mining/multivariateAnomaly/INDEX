@@ -1,0 +1,6 @@
+RBFMeasure              Calculate cosine similarity distance for a give
+                        timeseries measurement.
+kernelAlign             KernelAlignment of time-series measurements
+matrixAlign             Alignment of matrices.
+multivariateAnomaly     Anomaly detection in time-series measurements
+repmat                  Replicate matrix.

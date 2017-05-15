@@ -1,0 +1,82 @@
+Needs["PlotLegends`"]
+lSmoothingRate = 1/5;
+
+(* Bureua of Labor Statistics - National Unemployment Rate *)
+
+UnemploymentRate = 
+{                                           4.7,  4.5,  4.4,  4.5,  4.4,
+  4.6,  4.5,  4.4,  4.5,  4.5,  4.6,  4.7,  4.7,  4.7,  4.8,  4.7,  4.9,
+  4.9,  4.8,  5.1,  5.0,  5.5,  5.6,  5.8,  6.2,  6.2,  6.6,  6.8,  7.2,
+  7.6,  8.1,  8.5,  8.9,  9.4,  9.5,  9.4,  9.7,  9.8, 10.1, 10.0, 10.0,
+  9.7,  9.7,  9.7,  9.9,  9.7,  9.5,  9.5,  9.5,  9.6};
+UnemploymentRateSmoothed = ExponentialMovingAverage[UnemploymentRate, lSmoothingRate];
+UnemploymentRateScaled = Round[99*((UnemploymentRateSmoothed - Min[UnemploymentRateSmoothed])/(Max[UnemploymentRateSmoothed] - 
+         	Min[UnemploymentRateSmoothed])) + 1];
+
+(* Federal Reserve - IPI (Industrial Production Index): Consumer goods; 2002=100; Seasonally Adjusted *)
+IPIRelative = 
+{                                                 0.908, 0.878, 0.886, 0.879, 0.899, 
+ 0.861, 1.000, 0.937, 0.977, 0.959, 0.947, 0.968, 0.954, 0.961, 0.868, 0.869, 0.862, 
+ 0.846, 0.851, 0.761, 0.708, 0.683, 0.668, 0.648, 0.501, 0.452, 0.485, 0.417, 0.301, 
+ 0.142, 0.163, 0.139, 0.094, 0.020, 0.000, 0.108, 0.198, 0.277, 0.332, 0.324, 0.361, 
+ 0.446, 0.393, 0.426, 0.336, 0.515, 0.472, 0.550
+};
+
+(* US Dept. of Commerce - Retail Sales & Food Services (MARTS) *)
+RetailSalesRelative  = 
+{                                                 0.568,  0.514, 0.533, 0.565, 0.693, 
+ 0.655, 0.681, 0.764, 0.717, 0.826, 0.734, 0.777, 0.780, 0.855, 0.893, 1.000, 0.947, 
+ 0.942, 0.850, 0.881, 0.912, 0.939, 0.949, 0.912, 0.847, 0.707, 0.448, 0.228, 0.000, 
+ 0.135, 0.130, 0.013, 0.024, 0.072, 0.176, 0.182, 0.341, 0.168, 0.287, 0.412, 0.417, 
+ 0.442, 0.488, 0.659, 0.685, 0.600, 0.577, 0.611, 0.633
+};
+
+RetailSalesSmoothed = ExponentialMovingAverage[ RetailSalesRelative, 1/1];
+RetailSalesScaled = Round[99*(( RetailSalesSmoothed - Min[ RetailSalesSmoothed])/(Max[ RetailSalesSmoothed] - Min[ RetailSalesSmoothed])) + 1]; 
+
+
+(* UnemploymentRateTemp is a color scale I designed by blending over a range of 100 gradations *)
+Temp1 = Table[{Blend[{Black, Gray}, x]}, {x, 0, 1, 1/10}];
+Temp2 = Table[{Blend[{Gray, Orange}, x]}, {x, 0, 1, 1/52}];
+Temp3 = Table[{Blend[{Orange, Red}, x]}, {x, 0, 1, 1/38}];
+UnemploymentRateTemp = Join[Temp1,Temp2,Temp3];
+
+(*  colorUnemploymentRate is a function that is passed to the Mathematica graphing engine and allows me to 
+	dynamically change the color of the plot based on the value of a variable that is not on the x or y axes  
+	The built in Mathematica color variation function such as what is seen in 3-D surface plots assumes that the
+	color is set based on the value of x,y, or z. *)
+
+
+ColorUnemploymentRate = Function[{x, y},UnemploymentRateTemp[[UnemploymentRateScaled[[Round[x+1]]]]]];
+
+(*  I also need to create my own Legend as the Graphics Engine has no idea what I'm doing! I create my own legend 
+    by building a small graphic that is essentially a horizontal bar-graph. The color with the bar transitions at 
+    a constant rate across the full scale of values used in the graph. *)
+
+ColorUnemploymentRateLegend = Function[{x, y}, UnemploymentRateTemp[[x]]];
+
+UnemploymentRateLegend = ListLinePlot[ConstantArray[0.1, 100], ColorFunction -> ColorUnemploymentRateLegend, 
+   	ColorFunctionScaling -> False, Frame -> True, Axes -> {False, False}, 
+   	FrameTicks -> {{None, None}, {{{1, Round[Min[UnemploymentRate], 0.1]}, 
+       		{50, Round[Min[UnemploymentRate] + (Max[UnemploymentRate] - Min[UnemploymentRate])/2, 0.1]}, 
+       		{100, Round[Max[UnemploymentRate], 0.1]}}, None}}, 
+       FrameLabel -> {Style["Unemployment Rate", 14, Bold], None}, 
+   	PlotStyle -> Directive[Thickness[1]], ImageSize -> 300, AspectRatio -> 1/15];
+
+(* Main plot uses Federal Reserve IPI as the path of teh curve and colors it with the US Census Bureau Unemployment Rate*)
+WidthRange=.08;
+MinWidth=.04;
+IPIRelativeRange=Max[IPIRelative]-Min[IPIRelative];
+Dimensions[IPIRelativeRange]
+IPIRelativeU=Take[IPIRelative[[]],48]+((MinWidth*IPIRelativeRange)+((Take[RetailSalesScaled[[]],48]/100)*(WidthRange*IPIRelativeRange)));
+IPIRelativeL=Take[IPIRelative[[]],48]-((MinWidth*IPIRelativeRange)+((Take[RetailSalesScaled[[]],48]/100)*(WidthRange*IPIRelativeRange)));
+lPlotStyle = PlotStyle->Directive[Thickness[.0001],JoinForm["Round"]];
+lFrameLabel=FrameLabel->{Style["","AxesTitle"],Style["Industrial Production","AxesTitle"]};
+lPlotLabel=PlotLabel-> Style["Industrial Production, Sales, & Unemployment","GraphTitle"];
+lFrameTicks =FrameTicks->{{Automatic,None},{{{0,"August 2006"},{5,"January 2007"},{11,"July 2007"},{17,"January 2008"},{23,"July 2008"},{29,"January 2009"},{35,"July 2009"},
+	{41,"January 2010"},{48,"September 2010"}},
+	None}};
+lColorFunction = ColorFunction->ColorUnemploymentRate;
+lEpilog=Epilog->Inset[ UnemploymentRateLegend ,Offset[{-800,-275},Scaled[{1,1}]],{Left,Bottom}];
+DateListPlot[{IPIRelativeU,IPIRelativeL},{0,48},InterpolationOrder->3,Filling->{1->{2}},Joined -> True,lFrameLabel,lFrameTicks,lPlotLabel, 
+Axes->{False,False}, lColorFunction,ColorFunctionScaling->False,lPlotStyle,ImageSize->900,lEpilog,AspectRatio->1/3]
